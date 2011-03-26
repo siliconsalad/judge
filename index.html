@@ -82,7 +82,7 @@ $('[data-validate]').judge('keyup');</pre>
     <p>You can alter the selector and pass an object literal containing custom callbacks for greater control:</p>
     <pre class="sh_javascript">$('form#mygreatform input[data-validate]').judge('keyup', {
   success: function(element) { element.addClass('valid'); },
-  failure: function() { element.addClass('invalid'); }
+  failure: function(element) { element.addClass('invalid'); }
 });</pre>
 
 
