@@ -80,10 +80,15 @@
     <pre class="sh_javascript">// this binds to all validated text fields and text areas
 $('[data-validate]').judge('keyup');</pre>
 
-    <p>You can alter the selector and pass an object literal containing custom callbacks for greater control:</p>
+    <p>You can alter the selector and pass an object literal containing custom callbacks for greater control. Within the callback functions, the keyword <code><strong>this</strong></code> is a jQuery object containing the validated element. The <code></strong>failure</strong></code> callback receives an array containing validation error messages.</p>
     <pre class="sh_javascript">$('form#mygreatform input[data-validate]').judge('keyup', {
-  success: function(element) { element.addClass('valid'); },
-  failure: function(element) { element.addClass('invalid'); }
+  success: function() {
+    this.addClass('valid');
+  },
+  failure: function(errors) {
+    this.addClass('invalid');
+    alert(errors.join(', '));
+  }
 });</pre>
 
 
