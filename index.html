@@ -54,10 +54,10 @@
     
     <h2>Dependencies</h2>
 
-    <p>The only dependency Judge has is jQuery.  I'd like to offer Judge without any dependencies at all, but since Rails 3.1 will ship with jQuery by default, this isn't currently high on my list of priorities.</p>
+    <p>The only runtime dependency Judge has is jQuery.  I'll eventually offer the JavaScript adapter in a framework-agnostic format, but Rails 3.1 will ship with jQuery by default, so there shouldn't be too many problems there. :)</p>
 
     <h2>Install</h2>
-    <pre><span class="prompt">$</span> gem install judge #(not yet published to gemcutter)</pre>
+    <pre><span class="prompt">$</span> gem install judge</pre>
     <p>or add <code><strong>gem "judge"</strong></code> to your Gemfile and then</p>
     <pre><span class="prompt">$</span> cd path/to/your/app
 <span class="prompt">$</span> bundle install</pre>
@@ -91,6 +91,8 @@ $('[data-validate]').judge('keyup');</pre>
   }
 });</pre>
 
+    <h2>Tests</h2>
+    <pre><span class="prompt">$</span> cd judge &amp;&amp; rake</pre>
 
     <h2>License</h2>
     <p><a href="https://github.com/joecorcoran/judge/raw/master/LICENSE.txt">The usual business</a></p>
