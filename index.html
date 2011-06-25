@@ -1,9 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <meta charset='utf-8'>
 
-  <title>judge :: Easy client-side validation for Rails 3 :: joecorcoran</title>
+  <link href="http://fonts.googleapis.com/css?family=Goudy+Bookletter+1911&v1" rel="stylesheet" type="text/css">
+
+  <meta charset="utf-8">
+
+  <title>Judge :: Easy client-side validation for Rails 3 :: joecorcoran</title>
 
   <link href="styles/sh_darkness.css" rel="stylesheet" type="text/css" />
   <script src="scripts/sh_main.min.js" type="text/javascript"></script>
@@ -13,29 +16,32 @@
   <style type="text/css">
     body {
       margin-top: 1.0em;
-      background-color: #db0003;
+      background-color: #EAEBD5;
       font-family: Helvetica, Arial, FreeSans, san-serif;
-      font-size:88%;
-      color: #f2f2f2;
+      font-size:92%;
+      color: #333;
     }
     #container {
       margin: 0 auto;
       width: 700px;
     }
-    h1 { font-size: 3.8em; color: #ffffff; margin-bottom: 3px; }
-    h1 .small { font-size: 0.4em; }
+    h1, h2, h3, .description { font-family:"Goudy Bookletter 1911", Arial, sans-serif; }
+    h1 { font-size: 5.5em; color: #222; margin:0 0 10px; }
+    h1 small { font-size: 0.3em; }
     h1 a { text-decoration: none; background:transparent; }
-    h2 { font-size: 1.5em; color: #ffffff; margin-top:30px; }
-    h3 { text-align: center; color: #ffffff; }
-    a { color: #ffffff; background:#a60000; padding:3px; }
+    h2 { font-size: 2.5em; color: #222; margin:45px 0 0; letter-spacing:1px; }
+    h3 { text-align: center; color: #333; }
+    p { line-height:1.8em; margin:10px 0 0; }
+    a { color: #000; background:#D8D9C7; padding:3px; }
     a:hover { text-decoration:none; }
-    .description { font-size: 1.2em; margin-bottom: 30px; margin-top: 10px; font-style: italic;}
+    .description { font-size: 1.2em; margin: 10px 0 40px; color:#555; }
     .download { float: right; }
-    pre { background: #000; color: #fff; line-height:1.5em; padding: 15px;  -webkit-border-radius:4px; -moz-border-radius:4px; -o-border-radius:4px; border-radius:4px; }
+    pre { background: #C6C7AB; color: #000; line-height:1.5em; margin:10px 0 30px; padding: 15px;  -webkit-border-radius:4px; -moz-border-radius:4px; -o-border-radius:4px; border-radius:4px; }
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding-top:30px; font-style: italic; }
-    code, pre { font-size:1.2em; color:#fff; }
-    span.prompt { color:#999; }
+    .footer { text-align:center; padding:50px 0 20px; font-size:0.8em; }
+    code, pre { font-size:1.2em; color:#000; }
+    span.prompt { color:#555; }
+    span.comment { font-style:italic; color:#777; }
   </style>
 </head>
 
@@ -44,7 +50,7 @@
 
   <div id="container">
 
-    <h1><a href="http://github.com/joecorcoran/judge"><img src="images/judge.png" alt="judge" height="114px" width="394px" /></a></h1>
+    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>0.1.1</small></h1>
 
     <div class="description">
       Easy client-side form validation for Rails 3
@@ -54,22 +60,21 @@
     
     <h2>Dependencies</h2>
 
-    <p>The only runtime dependency Judge has is jQuery.  I'll eventually offer the JavaScript adapter in a framework-agnostic format, but Rails 3.1 will ship with jQuery by default, so there shouldn't be too many problems there. :)</p>
+    <p>The only runtime dependency Judge has is jQuery.  I'll eventually offer the JavaScript element in a framework-agnostic format, but Rails 3.1 will ship with jQuery by default, so this is a good start. :)</p>
 
-    <h2>Install</h2>
-    <pre><span class="prompt">$</span> gem install judge</pre>
-    <p>or add <code><strong>gem "judge"</strong></code> to your Gemfile and then</p>
+    <h2>Installation</h2>
+    <pre><span class="comment"># Gemfile</span>
+gem "judge", "~> 0.1.1"</pre>
     <pre><span class="prompt">$</span> cd path/to/your/app
 <span class="prompt">$</span> bundle install</pre>
-    <br />
-    <p>To copy Judge to your public/javascripts directory, run</p>
+    <p>To copy the JavaScript files to your public/javascripts directory, run:</p>
     <pre><span class="prompt">$</span> cd path/to/your/app
 <span class="prompt">$</span> rails g judge</pre>
-    <p>For further options (like specifying a different javascript path) run<p>
+    <p>For further options (like specifying a different javascript path) run:<p>
     <pre><span class="prompt">$</span> rails g judge --help</pre>
     
     <h2>Usage</h2>
-    <p>Replace <code>form_for</code> with <code><strong>validated_form_for</strong></code>. All arguments are the same. Replace your <code>f.text_field</code> or <code>f.text_area</code> with <code><strong>f.validated_text_field</strong></code> or <code><strong>f.validated_text_area</strong></code> respectively.</p>
+    <p>Replace <code>form_for</code> with <code><strong>validated_form_for</strong></code>. All arguments are the same. Replace your <code>f.text_field</code> or <code>f.text_area</code> with <code><strong>f.validated_text_field</strong></code> and <code><strong>f.validated_text_area</strong></code> respectively.</p>
 
     <pre class="sh_ruby"><%= validated_form_for(@post) do |f|%>
   <%= f.validated_text_field :title %>
@@ -92,15 +97,20 @@ $('[data-validate]').judge('keyup');</pre>
 });</pre>
 
     <h2>Tests</h2>
-    <pre><span class="prompt">$</span> cd judge &amp;&amp; rake</pre>
+    <p>There are integration tests for the Judge form helpers and the JavaScript is unit tested with Jasmine.</p>
+    <pre><span class="prompt">$</span> cd path/to/judge
 
-    <h2>License</h2>
-    <p><a href="https://github.com/joecorcoran/judge/raw/master/LICENSE.txt">The usual business</a></p>
-    <h2>Author</h2>
-    <p>Joe Corcoran (<a href="mailto:joe@tribesports.com">joe@tribesports.com</a>) at <a href="http://tribesports.com">Tribesports</a>.</p>
+<span class="comment"># all tests</span>
+<span class="prompt">$</span> rake
+
+<span class="comment"># only integration tests</span>
+<span class="prompt">$</span> rake test
+
+<span class="comment"># only unit tests</span>
+<span class="prompt">$</span> rake jasmine:ci</pre>
 
     <h2>Development</h2>
-    <p>If anyone is interested in creating adapters for Prototype, Dojo etc., drop me a line!  Also, <a href="http://github.com/joecorcoran/judge">fork yourself silly</a>.</p>
+    <p>Judge was written by Joe Corcoran (<a href="mailto:joe@tribesports.com">joe@tribesports.com</a>) for use at <a href="http://tribesports.com">Tribesports</a>. It has been made available for use under the <a href="https://github.com/joecorcoran/judge/raw/master/LICENSE.txt">MIT license</a>. If you're interested in creating adapters for Prototype, Dojo etc., you have two options: <a href="http://github.com/joecorcoran/judge">fork yourself silly</a> or wait for it to happen&hellip; which it will, eventually.</p>
 
     <div class="footer">
       Get the source code on GitHub: <a href="http://github.com/joecorcoran/judge">joecorcoran/judge</a>
