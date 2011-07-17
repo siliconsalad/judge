@@ -50,21 +50,21 @@
 
   <div id="container">
 
-    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>0.1.1</small></h1>
+    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>0.2.0</small></h1>
 
     <div class="description">
       Easy client-side form validation for Rails 3
     </div>
 
-    <p>Judge allows easy live form validation for Rails 3 apps, by porting many ActiveModel::Validation features to the client side and exposing your model validations as JSON within HTML5 data attributes.</p>
+    <p>Judge allows easy live form validation for Rails 3 apps, by porting many <code>ActiveModel::Validation</code> features to the client side and exposing your model validations as JSON within HTML5 data attributes.</p>
     
     <h2>Dependencies</h2>
 
-    <p>The only runtime dependency Judge has is jQuery.  I'll eventually offer the JavaScript element in a framework-agnostic format, but Rails 3.1 will ship with jQuery by default, so this is a good start. :)</p>
+    <p>Judge is now free from jQuery dependency and can be used easily with your preferred JavaScript library or framework!  Judge relies on the awesome <a href="http://documentcloud.github.com/underscore/">Underscore.js</a>, along with <a href="https://github.com/douglascrockford/JSON-js">JSON2.js</a>, which defers to the native JSON global object in modern browsers.  These two dependencies won't be installed for you &#8212; it's up to you to load them however you wish.</p>
 
     <h2>Installation</h2>
     <pre><span class="comment"># Gemfile</span>
-gem "judge", "~> 0.1.1"</pre>
+gem "judge", "~> 0.2.0"</pre>
     <pre><span class="prompt">$</span> cd path/to/your/app
 <span class="prompt">$</span> bundle install</pre>
     <p>To copy the JavaScript files to your public/javascripts directory, run:</p>
@@ -100,17 +100,20 @@ $('[data-validate]').judge('keyup');</pre>
     <p>There are integration tests for the Judge form helpers and the JavaScript is unit tested with Jasmine.</p>
     <pre><span class="prompt">$</span> cd path/to/judge
 
-<span class="comment"># all tests</span>
-<span class="prompt">$</span> rake
+<span class="comment"># all tests, headless (requires phantom.js)</span>
+<span class="prompt">$</span> bundle exec rake test:all
 
-<span class="comment"># only integration tests</span>
-<span class="prompt">$</span> rake test
+<span class="comment"># only helper tests</span>
+<span class="prompt">$</span> bundle exec rake test:helpers
 
-<span class="comment"># only unit tests</span>
-<span class="prompt">$</span> rake jasmine:ci</pre>
+<span class="comment"># only javascript tests, headless (requires phantom.js)</span>
+<span class="prompt">$</span> bundle exec rake test:js
+
+<span class="comment"># only javascript tests, with selenium</span>
+<span class="prompt">$</span> bundle exec rake jasmine:ci</pre>
 
     <h2>Development</h2>
-    <p>Judge was written by Joe Corcoran (<a href="mailto:joe@tribesports.com">joe@tribesports.com</a>) for use at <a href="http://tribesports.com">Tribesports</a>. It has been made available for use under the <a href="https://github.com/joecorcoran/judge/raw/master/LICENSE.txt">MIT license</a>. If you're interested in creating adapters for Prototype, Dojo etc., you have two options: <a href="http://github.com/joecorcoran/judge">fork yourself silly</a> or wait for it to happen&hellip; which it will, eventually.</p>
+    <p>Judge was written by Joe Corcoran (<a href="mailto:joe@tribesports.com">joe@tribesports.com</a>) for use at <a href="http://tribesports.com">Tribesports</a>. It has been made available for use under the <a href="https://github.com/joecorcoran/judge/raw/master/LICENSE.txt">MIT license</a>.</p>
 
     <div class="footer">
       Get the source code on GitHub: <a href="http://github.com/joecorcoran/judge">joecorcoran/judge</a>

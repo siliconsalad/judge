@@ -1,0 +1,136 @@
+  Processing by FoosController#new as HTML
+Rendered foos/new.html.erb within layouts/application (49.8ms)
+Completed 200 OK in 77ms (Views: 71.9ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.9ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 5.8ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.7ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 7.2ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 5.9ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 5.9ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Rendered foos/new.html.erb within layouts/application (19.5ms)
+Completed 200 OK in 29ms (Views: 22.9ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.1ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 5.9ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.2ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.5ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.1ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 8ms (Views: 7.4ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Rendered foos/new.html.erb within layouts/application (19.5ms)
+Completed 200 OK in 31ms (Views: 23.6ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.6ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.6ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.5ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.9ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.1ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 8ms (Views: 7.3ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 7.1ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Rendered foos/new.html.erb within layouts/application (47.5ms)
+Completed 200 OK in 74ms (Views: 69.0ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.6ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.9ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.8ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.2ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 5.7ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Rendered foos/new.html.erb within layouts/application (19.6ms)
+Completed 200 OK in 28ms (Views: 23.0ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.5ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.1ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 5.9ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.3ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.2ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.6ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Rendered foos/new.html.erb within layouts/application (45.3ms)
+Completed 200 OK in 84ms (Views: 79.3ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 13ms (Views: 12.3ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 5.6ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 9ms (Views: 8.7ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.5ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 5.7ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.2ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Rendered foos/new.html.erb within layouts/application (48.0ms)
+Completed 200 OK in 70ms (Views: 64.3ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.0ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.1ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.9ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.5ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.2ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.8ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 9ms (Views: 8.4ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Rendered foos/new.html.erb within layouts/application (45.2ms)
+Completed 200 OK in 67ms (Views: 58.9ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.4ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 5.8ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 5.9ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.2ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 6ms (Views: 6.1ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 7.0ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+Completed 200 OK in 7ms (Views: 6.8ms | ActiveRecord: 0.0ms)
