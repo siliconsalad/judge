@@ -25,23 +25,35 @@
       margin: 0 auto;
       width: 700px;
     }
-    h1, h2, h3, .description { font-family:"Goudy Bookletter 1911", Arial, sans-serif; }
+    h1, h2, h3, h4, h5, .description { font-family:"Goudy Bookletter 1911", Arial, sans-serif; }
     h1 { font-size: 5.5em; color: #222; margin:0 0 10px; }
     h1 small { font-size: 0.3em; }
     h1 a { text-decoration: none; background:transparent; }
     h2 { font-size: 2.5em; color: #222; margin:45px 0 0; letter-spacing:1px; }
-    h3 { text-align: center; color: #333; }
+    h3, h4, h5 { color: #222; font-size:1.5em; margin:30px 0 0; }
+    h4 { font-size:1.35em; }
+    h5 { font-size:1.2em; margin:20px 0 0; }
     p { line-height:1.8em; margin:10px 0 0; }
     a { color: #000; background:#D8D9C7; padding:3px; }
     a:hover { text-decoration:none; }
     .description { font-size: 1.2em; margin: 10px 0 40px; color:#555; }
     .download { float: right; }
-    pre { background: #C6C7AB; color: #000; line-height:1.5em; margin:10px 0 30px; padding: 15px;  -webkit-border-radius:4px; -moz-border-radius:4px; -o-border-radius:4px; border-radius:4px; }
+    pre {
+      background: #C6C7AB; color: #000; line-height:1.5em; margin:10px 0 30px; padding: 15px;
+      moz-box-shadow: inset 0 0 2px 2px #adae8f;
+      -webkit-box-shadow: inset 0 0 2px 2px #adae8f;
+      box-shadow: inset 0 0 2px 2px #adae8f;
+    }
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding:50px 0 20px; font-size:0.8em; }
     code, pre { font-size:1.2em; color:#000; }
     span.prompt { color:#555; }
     span.comment { font-style:italic; color:#777; }
+    ul.menu { list-style-type:none; margin:40px 0 0; padding:0; }
+    ul.menu li { display:inline; margin:0 0 0 5px; padding:0; }
+    ul.menu li a { }
+    ul.menu li.first { margin:0; }
+    div.indent { padding-left:20px; border-left:2px solid #C6C7AB; }
   </style>
 </head>
 
@@ -57,23 +69,33 @@
     </div>
 
     <p>Judge allows easy live form validation for Rails 3 apps, by porting many <code>ActiveModel::Validation</code> features to the client side and exposing your model validations as JSON within HTML5 data attributes.</p>
+
+    <ul class="menu">
+      <li class="first">Skip to:</li>
+      <li><a href="#dependencies">Dependencies</a></li>
+      <li><a href="#installation">Installation</a></li>
+      <li><a href="#quick-start">Quick start</a></li>
+      <li><a href="#documentation">Documentation</a></li>
+      <li><a href="#tests">Tests</a></li>
+      <li><a href="#development">Development</a></li>
+    </ul>
     
-    <h2>Dependencies</h2>
+    <h2 id="dependencies">Dependencies</h2>
 
     <p>Judge is now free from jQuery dependency and can be used easily with your preferred JavaScript library or framework!  Judge relies on the awesome <a href="http://documentcloud.github.com/underscore/">Underscore.js</a>, along with <a href="https://github.com/douglascrockford/JSON-js">JSON2.js</a>, which defers to the native JSON global object in modern browsers.  These two dependencies won't be installed for you &#8212; it's up to you to load them however you wish.</p>
 
-    <h2>Installation</h2>
+    <h2 id="installation">Installation</h2>
     <pre><span class="comment"># Gemfile</span>
 gem "judge", "~> 0.2.0"</pre>
     <pre><span class="prompt">$</span> cd path/to/your/app
 <span class="prompt">$</span> bundle install</pre>
-    <p>To copy the JavaScript files to your public/javascripts directory, run:</p>
+    <p>To copy judge.js to your public/javascripts directory, do:</p>
     <pre><span class="prompt">$</span> cd path/to/your/app
-<span class="prompt">$</span> rails g judge</pre>
-    <p>For further options (like specifying a different javascript path) run:<p>
-    <pre><span class="prompt">$</span> rails g judge --help</pre>
+<span class="prompt">$</span> rails generate judge</pre>
+    <p>To copy judge.js to a different directory, do:<p>
+    <pre><span class="prompt">$</span> rails generate judge path/to/my/js/directory</pre>
     
-    <h2>Usage</h2>
+    <h2 id="quick-start">Quick start</h2>
     <p>Replace <code>form_for</code> with <code><strong>validated_form_for</strong></code>. All arguments are the same. Replace your <code>f.text_field</code> or <code>f.text_area</code> with <code><strong>f.validated_text_field</strong></code> and <code><strong>f.validated_text_area</strong></code> respectively.</p>
 
     <pre class="sh_ruby"><%= validated_form_for(@post) do |f|%>
@@ -81,22 +103,43 @@ gem "judge", "~> 0.2.0"</pre>
   <%= f.validated_text_area :body %>
 <% end %></pre>
 
-    <p>Check out <strong>example.judge.js</strong> for the simplest JavaScript binding possible:</p>
-    <pre class="sh_javascript">// this binds to all validated text fields and text areas
-$('[data-validate]').judge('keyup');</pre>
+    <p>Simple validation is performed by using watchers.  Create a watcher for your input:</p>
+    <pre class="sh_javascript">var watcher = new judge.Watcher(document.getElementById('foo'));</pre>
 
-    <p>You can alter the selector and pass an object literal containing custom callbacks for greater control. Within the callback functions, the keyword <code><strong>this</strong></code> is a jQuery object containing the validated element. The <code><strong>failure</strong></code> callback receives an array containing validation error messages.</p>
-    <pre class="sh_javascript">$('form#mygreatform input[data-validate]').judge('keyup', {
-  success: function() {
-    this.addClass('valid');
-  },
-  failure: function(errors) {
-    this.addClass('invalid');
-    alert(errors.join(', '));
-  }
-});</pre>
+    <p>Check whether the current value of the watched element is valid at any point afterwards:</p>
+    <pre class="sh_javascript">watcher.validate().valid; // => true </pre>
 
-    <h2>Tests</h2>
+    <h2 id="documentation">Documentation</h2>
+    <h3>judge</h3>
+    <p>The global namespace.</p>
+    <h3>judge.Watcher</h3>
+    <p>Constructor for watchers.  Watchers are wrapper objects that contain a DOM element and various validation methods. For example:</p>
+    <pre class="sh_javascript">var watcher = new judge.Watcher(document.getElementById('foo'));</pre>
+    <div class="indent">
+      <h4>Instance methods</h4>
+      <h5>validate()</h5>
+      <p>Validate the current value of the wrapped DOM element.</p>
+      <pre class="sh_javascript">watcher.validate();
+  // => { valid:false, messages:['must be an integer'] }</pre>
+    </div>
+    <h3>judge.store</h3>
+    <p>Contains some methods for storing and retrieving watchers in groups, for more customised validation scenarios.</p>
+    <div class="indent">
+      <h4>Static methods</h4>
+      <h5>save(key, element)</h5>
+      <p>Store a watcher for an element against a key, for later use. If the key doesn't already exist, it will be created. Returns the store object.</p>
+      <pre class="sh_javascript">judge.store.save('mykey', document.getElementById('foo'));
+  // => [ { element:HTMLInputElement, etc&hellip; } ]</pre>
+      <h5>get(key)</h5>
+      <p>Return an array of watchers saved against the key. If no key is given, the store object is returned.</p>
+      <pre class="sh_javascript">judge.store.get('mykey'); 
+  // => [ { element:HTMLInputElement, etc&hellip; } ]
+
+judge.store.get();
+  // => { mykey:[ { element:HTMLInputElement, etc&hellip; } ], etc&hellip; }</pre>
+    </div>
+
+    <h2 id="tests">Tests</h2>
     <p>There are integration tests for the Judge form helpers and the JavaScript is unit tested with Jasmine.</p>
     <pre><span class="prompt">$</span> cd path/to/judge
 
@@ -112,7 +155,7 @@ $('[data-validate]').judge('keyup');</pre>
 <span class="comment"># only javascript tests, with selenium</span>
 <span class="prompt">$</span> bundle exec rake jasmine:ci</pre>
 
-    <h2>Development</h2>
+    <h2 id="development">Development</h2>
     <p>Judge was written by Joe Corcoran (<a href="mailto:joe@tribesports.com">joe@tribesports.com</a>) for use at <a href="http://tribesports.com">Tribesports</a>. It has been made available for use under the <a href="https://github.com/joecorcoran/judge/raw/master/LICENSE.txt">MIT license</a>.</p>
 
     <div class="footer">
@@ -132,3 +175,5 @@ pageTracker._trackPageview();
 } catch(err) {}</script>
 </body>
 </html>
+
+
