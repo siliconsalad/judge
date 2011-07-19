@@ -105,11 +105,16 @@ gem "judge", "~> 0.2.0"</pre>
   <%= f.validated_text_area :body %>
 <% end %></pre>
 
-    <p>Simple validation is performed by using watchers.  Create a watcher for your input:</p>
+    <p>Most judge functionality on the client side is based on the use of watchers.  A watcher is a wrapper object for a DOM element. Create a watcher for an <code>input</code> element:</p>
     <pre class="sh_javascript">var watcher = new judge.Watcher(document.getElementById('foo'));</pre>
 
-    <p>Check whether the current value of the watched element is valid at any point afterwards:</p>
+    <p>Check whether the current value of the watched <code>input</code> element is valid at any point afterwards:</p>
     <pre class="sh_javascript">watcher.validate().valid; // => true </pre>
+
+    <p>If you want to do a quick validation and see no benefit in creating a watcher, you can do that too. This example will validate all <code>input</code> elements on the page:</p>
+    <pre class="sh_javascript">judge.validate(document.getElementsByTagName('input'));
+  // => [ { valid:true, messages:[], element:HTMLInputElement },
+  //      { valid:false, messages:['must be even'], element:HTMLInputElement } ]</pre>
 
     <h2 id="documentation">Documentation</h2>
     <h3>judge</h3>
@@ -117,7 +122,7 @@ gem "judge", "~> 0.2.0"</pre>
     <div class="indent">
       <h4>Static methods</h4>
       <h5>validate <code>judge.validate(elements)</code></h5>
-      <p>Perform quick and easy validation on an element, or a <a href="#isCollection">collection</a> of elements, without creating or storing watchers. An array of objects is returned, each object containing the validated element, a Boolean <code>valid</code> flag and an array of error messages, which is empty if <code>valid</code> is true.</p>
+      <p>Perform quick and easy validation on an element, or a <a href="#isCollection"><code>collection</code></a> of elements, without creating or storing watchers. An array of objects is returned, each object containing the validated element, a Boolean <code>valid</code> flag and an array of error messages, which is empty if <code>valid</code> is true.</p>
       <pre class="sh_javascript">judge.validate(document.getElementsByTagName('input'));
   // => [ { valid:true, messages:[], element:HTMLInputElement },
   //      { valid:false, messages:['must be even'], element:HTMLInputElement } ]</pre>
@@ -153,14 +158,22 @@ gem "judge", "~> 0.2.0"</pre>
 judge.store.get();
   // => { mykey:[ { element:HTMLInputElement, &hellip; } ], &hellip; }</pre>
       <h5>getDOM <code>judge.store.getDOM(key)</code></h5>
-      <p>Return an array of DOM elements from watchers stored against a key. If no key is given, return an array of all stored elements.</p>
+      <p>Return an array of DOM elements from watchers stored against a key. If no key is given, the store object is returned, with all watchers converted to their wrapped DOM elements.</p>
       <pre class="sh_javascript">judge.store.getDOM('mykey');
   // => [ HTMLInputElement, HTMLInputElement &hellip; ]
   
 judge.store.getDOM();
-  // => [ HTMLInputElement, HTMLInputElement &hellip; ]</pre>
+  // => { mykey: [ HTMLInputElement ], mykey2: [ HTMLInputElement &hellip; ] }</pre>
       <h5>remove <code>judge.store.remove(key, element)</code></h5>
-      <h5>clear <code>judge.store.clear(key)</code></h5>
+      <p>Remove individual stored watcher. Returns store object after watcher was removed. If you want to remove all watchers stored against a key, or all stored watchers, use the <a href="#clear"><code>clear</code></a> method</p>
+      <pre class="sh_javascript">judge.store.remove('mykey', document.getElementById('foo'));
+  // => { mykey:[ &hellip; ], mykey2:[ &hellip; ] }</pre>
+      <h5 id="clear">clear <code>judge.store.clear(key)</code></h5>
+      <p>Remove all watchers stored against a key or, if no key is given, all stored watchers. Returns store object after watchers were removed.</p>
+      <pre class="sh_javascript">judge.store.clear('mykey');
+  // => { mykey:[], &hellip; }
+judge.store.clear();
+  // => {} </pre>
     </div>
     <h3>judge.utils</h3>
     <p>Most of judge.utils comprises of internal helpers that are probably of no use to anyone, but the following functions might be of interest.</p>
