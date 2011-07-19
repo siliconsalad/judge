@@ -17,7 +17,7 @@
     body {
       margin-top: 1.0em;
       background-color: #EAEBD5;
-      font-family: Helvetica, Arial, FreeSans, san-serif;
+      font-family: 'Helvetica Neue', Helvetica, Arial, FreeSans, san-serif;
       font-size:92%;
       color: #333;
     }
@@ -25,12 +25,13 @@
       margin: 0 auto;
       width: 700px;
     }
-    h1, h2, h3, h4, h5, .description { font-family:"Goudy Bookletter 1911", Arial, sans-serif; }
+    h1, h2, h3, h4, h5, .description { font-family:"Goudy Bookletter 1911", Georgia, Times New Roman, serif; }
     h1 { font-size: 5.5em; color: #222; margin:0 0 10px; }
     h1 small { font-size: 0.3em; }
     h1 a { text-decoration: none; background:transparent; }
     h2 { font-size: 2.5em; color: #222; margin:45px 0 0; letter-spacing:1px; }
     h3, h4, h5 { color: #222; font-size:2em; margin:40px 0 0; }
+    h3.nospace { margin-top:15px; }
     h4 { font-size:1.5em; margin:20px 0 0; }
     h5 { font-size:1.3em; margin:20px 0 0; }
     h5 code { color:#666; padding-left:10px; font-weight:normal; font-size:0.9em; }
@@ -48,11 +49,12 @@
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
     .footer { text-align:center; padding:50px 0 20px; font-size:0.8em; }
     code, pre { font-size:1.2em; color:#000; }
+    p code { font-weight:bold; }
     span.prompt { color:#555; }
     span.comment { font-style:italic; color:#777; }
     ul.menu { list-style-type:none; margin:40px 0 0; padding:0; }
     ul.menu li { display:inline; margin:0 0 0 5px; padding:0; }
-    ul.menu li a { }
+    ul.menu li a { font-weight:bold; }
     ul.menu li.first { margin:0; }
     div.indent { padding-left:20px; border-left:2px solid #C6C7AB; }
   </style>
@@ -95,7 +97,7 @@ gem "judge", "~> 0.2.0"</pre>
 <span class="prompt">$</span> rails generate judge</pre>
     <p>To copy judge.js to a different directory, do:<p>
     <pre><span class="prompt">$</span> rails generate judge path/to/my/js/directory</pre>
-    <p>Ensure that <a href="http://documentcloud.github.com/underscore/">Underscore.js</a> and <a href="https://github.com/douglascrockford/JSON-js">json2.js</a> are loaded too.</p>
+    <p>Ensure that <a href="http://documentcloud.github.com/underscore/">Underscore.js</a> and <a href="https://github.com/douglascrockford/JSON-js">json2.js</a> are loaded too. There is no minified version of judge.js provided. The assumption here is that you are probably squashing your assets with something like <a href="http://documentcloud.github.com/jammit/">Jammit</a>, or Rails 3.1's asset pipeline &#8211; minifying files twice can cause problems, especially for Google Closure. Plus it's better to read the code you're installing instead of treating it like a black box. :)</p>
     
     <h2 id="quick-start">Quick start</h2>
     <p>Replace <code>form_for</code> with <code><strong>validated_form_for</strong></code>. All arguments are the same. Replace your <code>f.text_field</code> or <code>f.text_area</code> with <code><strong>f.validated_text_field</strong></code> and <code><strong>f.validated_text_area</strong></code> respectively.</p>
@@ -117,7 +119,7 @@ gem "judge", "~> 0.2.0"</pre>
   //      { valid:false, messages:['must be even'], element:HTMLInputElement } ]</pre>
 
     <h2 id="documentation">Documentation</h2>
-    <h3>judge</h3>
+    <h3 class="nospace">judge</h3>
     <p>The global namespace.</p>
     <div class="indent">
       <h4>Static methods</h4>
@@ -126,6 +128,34 @@ gem "judge", "~> 0.2.0"</pre>
       <pre class="sh_javascript">judge.validate(document.getElementsByTagName('input'));
   // => [ { valid:true, messages:[], element:HTMLInputElement },
   //      { valid:false, messages:['must be even'], element:HTMLInputElement } ]</pre>
+      <h4>Static properties</h4>
+      <h5>customValidators <code>judge.customValidators</code></h5>
+      <p>Add your own validators to this object. Validator methods receive an <code>options</code> object which can be used to access the validation options as defined by <code>ActiveModel</code>.</p>
+      <p>It's likely that all you'll need from the <code>options</code> object is <code>options.message</code>, which is the validation error message, but to get a better idea of what <code>options</code> has to offer, open up a browser console and take a look at the JSON stored in the <code>data-validate</code> attribute of any form element created with the judge helpers.</p>
+      <p>Any validators added to <code>judge.customValidators</code> will be called automatically whenever a watcher <a href="#validators">validator</a> of the same name is detected. Phew!</p>
+      <pre class="sh_ruby"># custom validator and class
+class FooValidator < ActiveModel::EachValidator
+  def validate_each(record, attribute, value)
+    record.errors[attribute] << options[:message] unless value == "foo"
+  end
+end
+
+class Thing
+  include ActiveModel::Validations
+  validates :title, :foo => { :message => "must be foo" }
+end</pre>
+      <pre class="sh_ruby"># in your view
+<%= validated_form_for(@thing) do |f| %>
+  <%= validated_text_field :title %>
+<% end %></pre>
+      <pre class="sh_javascript">// on the client side
+judge.customValidators.foo = function(options) {
+  if (instance.element.value === 'foo') {
+    return { valid:true, messages:[], element:instance.element }; 
+  } else {
+    return { valid:false, messages[options.message], element:instance.element }
+  }
+};</pre>
     </div>
     <h3>judge.Watcher</h3>
     <p>Constructor for watchers.  Watchers are wrapper objects that contain a DOM element and various validation methods. For example:</p>
@@ -137,7 +167,7 @@ gem "judge", "~> 0.2.0"</pre>
       <pre class="sh_javascript">watcher.validate();
   // => { valid:false, messages:['must be even'], element:HTMLInputElement }</pre>
       <h4>Instance properties</h4>
-      <h5>validators <code>watcher.validators</code></h5>
+      <h5 id="validators">validators <code>watcher.validators</code></h5>
       <p>Returns an array of validators (JavaScript object representations of the associated <code>ActiveModel</code> validators) for the wrapped element.</p>
       <pre class="sh_javascript">watcher.validators;
   // => [ { kind:'presence', options:{ &hellip; } }, { kind:'format', options:{ &hellip; } } ]</pre>
@@ -176,7 +206,7 @@ judge.store.clear();
   // => {} </pre>
     </div>
     <h3>judge.utils</h3>
-    <p>Most of judge.utils comprises of internal helpers that are probably of no use to anyone, but the following functions might be of interest.</p>
+    <p>judge.utils is mostly comprised of internal helpers that are probably of no use to anyone, but the following functions might be of interest.</p>
     <div class="indent">
       <h4>Static methods</h4>
       <h5 id="isCollection">isCollection <code>judge.utils.isCollection(object)</code></h5>
