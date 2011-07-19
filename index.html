@@ -83,7 +83,7 @@
     
     <h2 id="dependencies">Dependencies</h2>
 
-    <p>Judge is now free from jQuery dependency and can be used easily with your preferred JavaScript library or framework!  Judge relies on the awesome <a href="http://documentcloud.github.com/underscore/">Underscore.js</a>, along with <a href="https://github.com/douglascrockford/JSON-js">JSON2.js</a>, which defers to the native JSON global object in modern browsers.  These two dependencies won't be installed for you &#8212; it's up to you to load them however you wish.</p>
+    <p>Judge is now free from jQuery dependency and can be used easily with your preferred JavaScript library or framework!  Judge relies on the awesome <a href="http://documentcloud.github.com/underscore/">Underscore.js</a>, along with <a href="https://github.com/douglascrockford/JSON-js">json2.js</a>, which defers to the native JSON global object in modern browsers.  These two dependencies won't be installed for you &#8212; it's up to you to load them however you wish.</p>
 
     <h2 id="installation">Installation</h2>
     <pre><span class="comment"># Gemfile</span>
@@ -95,6 +95,7 @@ gem "judge", "~> 0.2.0"</pre>
 <span class="prompt">$</span> rails generate judge</pre>
     <p>To copy judge.js to a different directory, do:<p>
     <pre><span class="prompt">$</span> rails generate judge path/to/my/js/directory</pre>
+    <p>Ensure that <a href="http://documentcloud.github.com/underscore/">Underscore.js</a> and <a href="https://github.com/douglascrockford/JSON-js">json2.js</a> are loaded too.</p>
     
     <h2 id="quick-start">Quick start</h2>
     <p>Replace <code>form_for</code> with <code><strong>validated_form_for</strong></code>. All arguments are the same. Replace your <code>f.text_field</code> or <code>f.text_area</code> with <code><strong>f.validated_text_field</strong></code> and <code><strong>f.validated_text_area</strong></code> respectively.</p>
@@ -116,9 +117,10 @@ gem "judge", "~> 0.2.0"</pre>
     <div class="indent">
       <h4>Static methods</h4>
       <h5>validate <code>judge.validate(elements)</code></h5>
-      <p>Perform quick and easy validation on an element, or a <a href="#isCollection">collection</a> of elements, without creating or storing watchers.</p>
+      <p>Perform quick and easy validation on an element, or a <a href="#isCollection">collection</a> of elements, without creating or storing watchers. An array of objects is returned, each object containing the validated element, a Boolean <code>valid</code> flag and an array of error messages, which is empty if <code>valid</code> is true.</p>
       <pre class="sh_javascript">judge.validate(document.getElementsByTagName('input'));
-// => [ { valid:true, messages:[] }, { valid:false, messages:['must be even'] } ]</pre>
+  // => [ { valid:true, messages:[], element:HTMLInputElement },
+  //      { valid:false, messages:['must be even'], element:HTMLInputElement } ]</pre>
     </div>
     <h3>judge.Watcher</h3>
     <p>Constructor for watchers.  Watchers are wrapper objects that contain a DOM element and various validation methods. For example:</p>
@@ -126,14 +128,14 @@ gem "judge", "~> 0.2.0"</pre>
     <div class="indent">
       <h4>Instance methods</h4>
       <h5>validate <code>watcher.validate()</code></h5>
-      <p>Validate the current value of the wrapped DOM element.</p>
+      <p>Validate the current value of the wrapped DOM element. An object is returned, containing the validated element, a Boolean <code>valid</code> flag and an array of error messages, which is empty if <code>valid</code> is true.</p>
       <pre class="sh_javascript">watcher.validate();
-  // => { valid:false, messages:['must be an integer'] }</pre>
+  // => { valid:false, messages:['must be even'], element:HTMLInputElement }</pre>
       <h4>Instance properties</h4>
       <h5>validators <code>watcher.validators</code></h5>
-      <p>Returns array of validators for the wrapped element.</p>
+      <p>Returns an array of validators (JavaScript object representations of the associated <code>ActiveModel</code> validators) for the wrapped element.</p>
       <pre class="sh_javascript">watcher.validators;
-  // => [ { kind:'presence', options:{ &hellip; } } ]</pre>
+  // => [ { kind:'presence', options:{ &hellip; } }, { kind:'format', options:{ &hellip; } } ]</pre>
     </div>
     <h3>judge.store</h3>
     <p>Contains some methods for storing and retrieving watchers in groups, for more customised validation scenarios.</p>
@@ -151,6 +153,12 @@ gem "judge", "~> 0.2.0"</pre>
 judge.store.get();
   // => { mykey:[ { element:HTMLInputElement, &hellip; } ], &hellip; }</pre>
       <h5>getDOM <code>judge.store.getDOM(key)</code></h5>
+      <p>Return an array of DOM elements from watchers stored against a key. If no key is given, return an array of all stored elements.</p>
+      <pre class="sh_javascript">judge.store.getDOM('mykey');
+  // => [ HTMLInputElement, HTMLInputElement &hellip; ]
+  
+judge.store.getDOM();
+  // => [ HTMLInputElement, HTMLInputElement &hellip; ]</pre>
       <h5>remove <code>judge.store.remove(key, element)</code></h5>
       <h5>clear <code>judge.store.clear(key)</code></h5>
     </div>
@@ -159,7 +167,7 @@ judge.store.get();
     <div class="indent">
       <h4>Static methods</h4>
       <h5 id="isCollection">isCollection <code>judge.utils.isCollection(object)</code></h5>
-      <p>Returns true if object is an Array or a NodeList.  NodeList is the type of Array-like object returned by queries like <code>document.getElementsByTagName('input')</code>.</p>
+      <p>Returns true if object is an <code>Array</code> or a <code>NodeList</code>.  <code>NodeList</code> is the type of Array-like object returned by queries like <code>document.getElementsByTagName('input')</code>.</p>
       <pre class="sh_javascript">judge.utils.isCollection(document.querySelectorAll('body .foo')); // => true
       
 judge.utils.isCollection([1, 2, 3]); // => true
