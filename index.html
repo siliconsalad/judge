@@ -148,6 +148,7 @@ gem "judge", "~> 0.2.0"</pre>
       <h5 id="customValidators">customValidators <code>judge.customValidators</code></h5>
       <p>Add your own validators to this object. Validator methods receive an <code>options</code> object which can be used to access the validation options as defined by <code>ActiveModel</code>.</p>
       <p>It's likely that all you'll need from the <code>options</code> object is <code>options.message</code>, which is the validation error message, but to get a better idea of what <code>options</code> has to offer, open up a browser console and take a look at the JSON stored in the <code>data-validate</code> attribute of any form element created with the judge helpers.</p>
+      <p>Validator methods have access to a variable named <code>instance</code>, which points to the watcher for the element being validated.  So <code>instance.element</code> gives you access to the element itself.</p>
       <p>Any validators added to <code>judge.customValidators</code> will be called automatically whenever a watcher <a href="#validators">validator</a> of the same name is detected. Phew!</p>
       <pre class="sh_ruby"># custom validator and class
 class FooValidator < ActiveModel::EachValidator
