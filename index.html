@@ -25,11 +25,11 @@
       margin: 0 auto;
       width: 700px;
     }
-    h1, h2, h3, h4, h5, .description { font-family:"Goudy Bookletter 1911", Georgia, Times New Roman, serif; }
+    h1, h2, h3, h4, h5, .description, .version { font-family:"Goudy Bookletter 1911", Georgia, Times New Roman, serif; font-weight:normal; }
     h1 { font-size: 5.5em; color: #222; margin:0 0 10px; }
     h1 small { font-size: 0.3em; }
     h1 a { text-decoration: none; background:transparent; }
-    h2 { font-size: 2.5em; color: #222; margin:45px 0 0; letter-spacing:1px; }
+    h2 { font-size: 2.5em; color: #222; margin:60px 0 0; letter-spacing:1px; }
     h3, h4, h5 { color: #222; font-size:2em; margin:40px 0 0; }
     h3.nospace { margin-top:15px; }
     h4 { font-size:1.5em; margin:20px 0 0; }
@@ -47,7 +47,7 @@
       box-shadow: inset 0 0 2px 2px #adae8f;
     }
     hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { text-align:center; padding:50px 0 20px; font-size:0.8em; }
+    .footer { margin:60px 0 30px; border-top:1px solid #C6C7AB; }
     code, pre { font-size:1.2em; color:#000; }
     p code { font-weight:bold; }
     span.prompt { color:#555; }
@@ -57,6 +57,7 @@
     ul.menu li a { font-weight:bold; }
     ul.menu li.first { margin:0; }
     div.indent { padding-left:20px; border-left:2px solid #C6C7AB; }
+    .version { font-size:1.3em; padding-right:10px; color:#000; }
   </style>
 </head>
 
@@ -71,16 +72,16 @@
       Easy client-side form validation for Rails 3
     </div>
 
-    <p>Judge allows easy live form validation for Rails 3 apps, by porting many <code>ActiveModel::Validation</code> features to the client side and exposing your model validations as JSON within HTML5 data attributes.</p>
+    <p>Judge allows easy live form validation for Rails 3 apps, by porting many <code>ActiveModel::Validation</code> features to JavaScript and exposing your model validations as JSON within HTML5 data attributes. It's fast and it's purely on the client-side &#8211; no more code duplication for standard validators, no more gratuitous AJAX!</p>
 
     <ul class="menu">
-      <li class="first">Skip to:</li>
-      <li><a href="#dependencies">Dependencies</a></li>
+      <li class="first"><a href="#dependencies">Dependencies</a></li>
       <li><a href="#installation">Installation</a></li>
       <li><a href="#quick-start">Quick start</a></li>
+      <li><a href="#features">Features</a></li>
       <li><a href="#documentation">Documentation</a></li>
       <li><a href="#tests">Tests</a></li>
-      <li><a href="#development">Development</a></li>
+      <li><a href="#changelog">Changelog</a></li>
     </ul>
     
     <h2 id="dependencies">Dependencies</h2>
@@ -118,6 +119,21 @@ gem "judge", "~> 0.2.0"</pre>
   // => [ { valid:true, messages:[], element:HTMLInputElement },
   //      { valid:false, messages:['must be even'], element:HTMLInputElement } ]</pre>
 
+    <h2 id="Features">Features</h2>
+    <h3 class="nospace">What&rsquo;s available</h3>
+    <p>Validators:</p>
+      <ul>
+        <li><strong>presence</strong>;</li>
+        <li><strong>length</strong> (options: minimum, maximum, is);</li>
+        <li><strong>exclusion</strong> (options: in);</li>
+        <li><strong>inclusion</strong> (options: in);</li>
+        <li><strong>format</strong> (options: with, without); and</li>
+        <li><strong>numericality</strong> (options: greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, odd, even, only_integer).</li>
+      </ul>
+    <p>The <strong>allow_blank</strong> option is available on all validators. If you can include a custom message in your model validation, the same message will be used by Judge. Otherwise, error messages are taken from <code>I18n.t("errors.messages")</code>. This hasn't been extensively trialled in different I18n scenarios, but it has worked fine so far. If this is not flexible enough for you, please <a href="mailto:joe@tribesports.com">get in touch</a> and we can figure something out.</p>
+    <h3>What&rsquo;s not</h3>
+    <p>Validators like <strong>confirmation</strong> and <strong>acceptance</strong> have been omitted for the time being, because it's trivial to write a line of JavaScript to check whether a box has been ticked &#8211; you don't need a gem for that!  If you have a genuine need for these to be included, <a href="mailto:joe@tribesports.com">drop me a line</a>. Options like <strong>if</strong> and <strong>on</strong>, which require more involved interactions with your Rails application, aren't really viable on the client-side and are simply ignored. Hopefully validating <strong>uniqueness</strong> will be possible in the future.  Right now, you can define a <a href="#customValidators">custom validator</a> that makes an XMLHttpRequest if you need to.</p>
+
     <h2 id="documentation">Documentation</h2>
     <h3 class="nospace">judge</h3>
     <p>The global namespace.</p>
@@ -129,7 +145,7 @@ gem "judge", "~> 0.2.0"</pre>
   // => [ { valid:true, messages:[], element:HTMLInputElement },
   //      { valid:false, messages:['must be even'], element:HTMLInputElement } ]</pre>
       <h4>Static properties</h4>
-      <h5>customValidators <code>judge.customValidators</code></h5>
+      <h5 id="customValidators">customValidators <code>judge.customValidators</code></h5>
       <p>Add your own validators to this object. Validator methods receive an <code>options</code> object which can be used to access the validation options as defined by <code>ActiveModel</code>.</p>
       <p>It's likely that all you'll need from the <code>options</code> object is <code>options.message</code>, which is the validation error message, but to get a better idea of what <code>options</code> has to offer, open up a browser console and take a look at the JSON stored in the <code>data-validate</code> attribute of any form element created with the judge helpers.</p>
       <p>Any validators added to <code>judge.customValidators</code> will be called automatically whenever a watcher <a href="#validators">validator</a> of the same name is detected. Phew!</p>
@@ -240,11 +256,13 @@ judge.utils.isValidatable(document.getElementsByTagName('label')[0]); // => fals
 <span class="comment"># only javascript tests, with selenium</span>
 <span class="prompt">$</span> bundle exec rake jasmine:ci</pre>
 
-    <h2 id="development">Development</h2>
-    <p>Judge was written by Joe Corcoran (<a href="mailto:joe@tribesports.com">joe@tribesports.com</a>) for use at <a href="http://tribesports.com">Tribesports</a>. It has been made available for use under the <a href="https://github.com/joecorcoran/judge/raw/master/LICENSE.txt">MIT license</a>.</p>
-
+    <h2 id="changelog">Changelog</h2>
+    <p><span class="version">0.2.0</span> Remove jQuery dependency; refactored to include new namespace, watchers and store; added headless testing.</p>
+    <p><span class="version">0.1.1</span> Removed duplicate dependencies in gemspec.</p>
+    <p><span class="version">0.1.0</span> First release.</p>
+    
     <div class="footer">
-      Get the source code on GitHub: <a href="http://github.com/joecorcoran/judge">joecorcoran/judge</a>
+      <p>Judge was written by Joe Corcoran (<a href="mailto:joe@tribesports.com">joe@tribesports.com</a>) for <a href="http://tribesports.com">Tribesports</a>. It is available for use under the <a href="https://github.com/joecorcoran/judge/raw/master/LICENSE.txt">MIT license</a>.</p>
     </div>
 
   </div>
