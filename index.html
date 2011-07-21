@@ -158,7 +158,6 @@ end</pre>
 
       <pre class="sh_ruby"># your model
 class Thing < ActiveRecord::Base
-  include ActiveModel::Validations
   validates :title, :foo => { :message => "must be foo" }
 end</pre>
       <pre class="sh_ruby"># your view
