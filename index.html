@@ -86,7 +86,7 @@
     
     <h2 id="dependencies">Dependencies</h2>
 
-    <p>Judge is now free from jQuery dependency and can be used easily with your preferred JavaScript library or framework!  Judge relies on the awesome <a href="http://documentcloud.github.com/underscore/">Underscore.js</a>, along with <a href="https://github.com/douglascrockford/JSON-js">json2.js</a>, which defers to the native JSON global object in modern browsers.  These two dependencies won't be installed for you &#8212; it's up to you to load them however you wish.</p>
+    <p>Judge is now free from jQuery dependency and can be used easily with your preferred JavaScript library or framework!  Judge relies on the awesome <a href="http://documentcloud.github.com/underscore/">Underscore.js</a>, along with <a href="https://github.com/douglascrockford/JSON-js">json2.js</a>, which defers to the native JSON global object in modern browsers.</p>
 
     <h2 id="installation">Installation</h2>
     <pre><span class="comment"># Gemfile</span>
@@ -96,9 +96,11 @@ gem "judge", "~> 0.2.0"</pre>
     <p>To copy judge.js to your public/javascripts directory, do:</p>
     <pre><span class="prompt">$</span> cd path/to/your/app
 <span class="prompt">$</span> rails generate judge</pre>
+    <p>If you don't want to copy <a href="http://documentcloud.github.com/underscore/">Underscore.js</a> and <a href="https://github.com/douglascrockford/JSON-js">json2.js</a> (maybe you already have them?), do:</p>
+    <pre><span class="prompt">$</span> rails generate judge --no-dep</pre>
     <p>To copy judge.js to a different directory, do:<p>
     <pre><span class="prompt">$</span> rails generate judge path/to/my/js/directory</pre>
-    <p>Ensure that <a href="http://documentcloud.github.com/underscore/">Underscore.js</a> and <a href="https://github.com/douglascrockford/JSON-js">json2.js</a> are loaded too. There is no minified version of judge.js provided. The assumption here is that you are probably squashing your assets with something like <a href="http://documentcloud.github.com/jammit/">Jammit</a>, or Rails 3.1's asset pipeline &#8211; minifying files twice can cause problems, especially for Google Closure. Plus it's better to read the code you're installing instead of treating it like a black box. :)</p>
+    <p>Ensure that judge.js and its dependencies are included in your page. The javascript files provided by this gem are not minified. The assumption here is that you are probably squashing your assets with something like <a href="http://documentcloud.github.com/jammit/">Jammit</a>, or Rails 3.1's asset pipeline &#8211; minifying files twice can cause problems, especially for Google Closure. Plus it's better to read the code you're installing instead of treating it like a black box. :)</p>
     
     <h2 id="quick-start">Quick start</h2>
     <p>Replace <code>form_for</code> with <code><strong>validated_form_for</strong></code>. All arguments are the same. Replace your <code>f.text_field</code> or <code>f.text_area</code> with <code><strong>f.validated_text_field</strong></code> and <code><strong>f.validated_text_area</strong></code> respectively.</p>
@@ -147,22 +149,23 @@ gem "judge", "~> 0.2.0"</pre>
       <h4>Static properties</h4>
       <h5 id="customValidators">customValidators <code>judge.customValidators</code></h5>
       <p>Add your own validators to this object. Let's say you have something like this set up:</p>
-      <pre class="sh_ruby"># custom validator and model class (ruby)
+      <pre class="sh_ruby"># autoload this file 
 class FooValidator < ActiveModel::EachValidator
   def validate_each(record, attribute, value)
     record.errors[attribute] << options[:message] unless value == "foo"
   end
-end
+end</pre>
 
-class Thing
+      <pre class="sh_ruby"># your model
+class Thing < ActiveRecord::Base
   include ActiveModel::Validations
   validates :title, :foo => { :message => "must be foo" }
 end</pre>
-      <pre class="sh_ruby"># in your view (erb)
+      <pre class="sh_ruby"># your view
 <%= validated_form_for(@thing) do |f| %>
   <%= validated_text_field :title %>
 <% end %></pre>
-      <p>Judge validator methods receive an <code>options</code> object and must return an object literal with properties <code>valid</code> (Boolean) and <code>messages</code> (an array of error messages, only necessary if <code>valid</code> is <strong>false</strong>).</p>
+      <p>Then Judge will expect a method named <code>foo</code> to have been added to <code>judge.customValidators</code>:</p>
       <pre class="sh_javascript">// on the client side
 judge.customValidators.foo = function(options) {
   if (instance.element.value === 'foo') {
@@ -171,7 +174,8 @@ judge.customValidators.foo = function(options) {
     return { valid:false, messages[options.message] }
   }
 };</pre>
-      <p>The <code>options</code> object contains the validation options as defined by <code>ActiveModel</code>. It's likely that all you'll need is <code>options.message</code>, which is the validation error message you set in your model, but to get a better idea of what <code>options</code> has to offer, open up a browser console and take a look at the JSON stored in the <code>data-validate</code> attribute of any form element created with the judge helpers.</p>
+      <p>Judge validator methods receive an <code>options</code> object and must return an object literal with properties <code>valid</code> (Boolean) and <code>messages</code> (an array of error messages, only necessary if <code>valid</code> is <strong>false</strong>).</p>
+      <p>The <code>options</code> object contains the validation options from your Ruby custom validator. It's likely that all you'll need is <code>options.message</code>, which is the validation error message you set in your model, but to get a better idea of what <code>options</code> has to offer, open up a browser console and take a look at the JSON stored in the <code>data-validate</code> attribute of any form element created with the judge helpers.</p>
       <p>Validator methods have access to a variable named <code>instance</code>, which points to the watcher for the element being validated.  So <code>instance.element</code> gives you access to the element itself.</p>
       <p>Any validators added to <code>judge.customValidators</code> will be called automatically whenever a watcher <a href="#validators">validator</a> of the same name is detected. Phew!</p>
     </div>
