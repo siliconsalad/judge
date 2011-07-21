@@ -169,9 +169,9 @@ end</pre>
       <pre class="sh_javascript">// on the client side
 judge.customValidators.foo = function(options) {
   if (instance.element.value === 'foo') {
-    return { valid:true, messages:[] }; 
+    return { valid:true }; 
   } else {
-    return { valid:false, messages[options.message] }
+    return { valid:false, messages[options.message] };
   }
 };</pre>
       <p>Judge validator methods receive an <code>options</code> object and must return an object literal with properties <code>valid</code> (Boolean) and <code>messages</code> (an array of error messages, only necessary if <code>valid</code> is <strong>false</strong>).</p>
