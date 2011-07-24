@@ -66,7 +66,7 @@
 
   <div id="container">
 
-    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>0.2.0</small> <a href="http://travis-ci.org/joecorcoran/judge"><img src="http://travis-ci.org/joecorcoran/judge.png" alt="Judge build status on Travis" /></a></h1>
+    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>0.3.0</small> <a href="http://travis-ci.org/joecorcoran/judge"><img src="http://travis-ci.org/joecorcoran/judge.png" alt="Judge build status on Travis" /></a></h1>
 
     <div class="description">
       Easy client-side form validation for Rails 3
@@ -130,11 +130,13 @@ gem "judge", "~> 0.2.0"</pre>
         <li><strong>exclusion</strong> (options: in);</li>
         <li><strong>inclusion</strong> (options: in);</li>
         <li><strong>format</strong> (options: with, without); and</li>
-        <li><strong>numericality</strong> (options: greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, odd, even, only_integer).</li>
+        <li><strong>numericality</strong> (options: greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, odd, even, only_integer);</li>
+        <li><strong>acceptance</strong>;</li>
+        <li><strong>confirmation</strong> (input and confirmation input <em>must</em> have matching ids).</li>
       </ul>
     <p>The <strong>allow_blank</strong> option is available on all validators. If you can include a custom message in your model validation, the same message will be used by Judge. Otherwise, error messages are taken from <code>I18n.t("errors.messages")</code>. This hasn't been extensively trialled in different I18n scenarios, but it has worked fine so far. If this is not flexible enough for you, please <a href="mailto:joe@tribesports.com">get in touch</a> and we can figure something out.</p>
     <h3>What&rsquo;s not</h3>
-    <p>Validators like <strong>confirmation</strong> and <strong>acceptance</strong> have been omitted for the time being, because it's trivial to write a line of JavaScript to check whether a box has been ticked &#8211; you don't need a gem for that!  If you have a genuine need for these to be included, <a href="mailto:joe@tribesports.com">drop me a line</a>. Options like <strong>if</strong> and <strong>on</strong>, which require more involved interactions with your Rails application, aren't really viable on the client-side and are simply ignored. Hopefully validating <strong>uniqueness</strong> will be possible in the future.  Right now, you can define a <a href="#customValidators">custom validator</a> that makes an XMLHttpRequest if you need to.</p>
+    <p>The <strong>tokenizer</strong> option for the <strong>length</strong> validator is currently missing. Options like <strong>if</strong>, <strong>unless</strong> and <strong>on</strong>, which require more involved interactions with your Rails application, aren't really useful or viable on the client-side and are simply ignored. Validating <strong>uniqueness</strong> in a structured way is planned for the future &#8211; right now, you can define a <a href="#customValidators">custom validator</a> that makes an XMLHttpRequest if you need to.</p>
 
     <h2 id="documentation">Documentation</h2>
     <h3 class="nospace">judge</h3>
@@ -262,6 +264,7 @@ judge.utils.isValidatable(document.getElementsByTagName('label')[0]); // => fals
 <span class="prompt">$</span> bundle exec rake jasmine:ci</pre>
 
     <h2 id="changelog">Changelog</h2>
+    <p><span class="version">0.3.0</span> Added confirmation and acceptance validation.</p>
     <p><span class="version">0.2.0</span> Remove jQuery dependency; refactored to include new namespace, watchers and store; added headless testing.</p>
     <p><span class="version">0.1.1</span> Removed duplicate dependencies in gemspec.</p>
     <p><span class="version">0.1.0</span> First release.</p>
