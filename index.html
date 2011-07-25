@@ -37,6 +37,7 @@
     h5 code { color:#666; padding-left:10px; font-weight:normal; font-size:0.9em; }
     p { line-height:1.8em; margin:10px 0 0; }
     a { color: #000; background:#D8D9C7; padding:3px; }
+    a.clean { background:none; padding:0; }
     a:hover { text-decoration:none; }
     .description { font-size: 1.2em; margin: 10px 0 40px; color:#555; }
     .download { float: right; }
@@ -51,6 +52,7 @@
     code, pre { font-size:1.2em; color:#000; }
     p code { font-weight:bold; }
     span.prompt { color:#555; }
+    ul li { line-height:25px; }
     span.comment { font-style:italic; color:#777; }
     ul.menu { list-style-type:none; margin:40px 0 0; padding:0; }
     ul.menu li { display:inline; margin:0 0 0 5px; padding:0; }
@@ -66,7 +68,7 @@
 
   <div id="container">
 
-    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>0.3.0</small> <a href="http://travis-ci.org/joecorcoran/judge"><img src="http://travis-ci.org/joecorcoran/judge.png" alt="Judge build status on Travis" /></a></h1>
+    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>0.3.0</small></h1>
 
     <div class="description">
       Easy client-side form validation for Rails 3
@@ -90,7 +92,7 @@
 
     <h2 id="installation">Installation</h2>
     <pre><span class="comment"># Gemfile</span>
-gem "judge", "~> 0.2.0"</pre>
+gem "judge", "~> 0.3.0"</pre>
     <pre><span class="prompt">$</span> cd path/to/your/app
 <span class="prompt">$</span> bundle install</pre>
     <p>To copy judge.js to your public/javascripts directory, do:</p>
@@ -103,7 +105,7 @@ gem "judge", "~> 0.2.0"</pre>
     <p>Ensure that judge.js and its dependencies are included in your page. The javascript files provided by this gem are not minified. The assumption here is that you are probably squashing your assets with something like <a href="http://documentcloud.github.com/jammit/">Jammit</a>, or Rails 3.1's asset pipeline &#8211; minifying files twice can cause problems, especially for Google Closure. Plus it's better to read the code you're installing instead of treating it like a black box. :)</p>
     
     <h2 id="quick-start">Quick start</h2>
-    <p>Replace <code>form_for</code> with <code><strong>validated_form_for</strong></code>. All arguments are the same. Replace your <code>f.text_field</code> or <code>f.text_area</code> with <code><strong>f.validated_text_field</strong></code> and <code><strong>f.validated_text_area</strong></code> respectively.</p>
+    <p>Replace <code>form_for</code> with <code><strong>validated_form_for</strong></code>. All arguments are the same. Replace your <code>f.text_field</code>, <code>f.text_area</code> etc. with <code><strong>f.validated_text_field</strong></code>, <code><strong>f.validated_text_area</strong></code> and so on.</p>
 
     <pre class="sh_ruby"><%= validated_form_for(@post) do |f|%>
   <%= f.validated_text_field :title %>
@@ -123,18 +125,30 @@ gem "judge", "~> 0.2.0"</pre>
 
     <h2 id="Features">Features</h2>
     <h3 class="nospace">What&rsquo;s available</h3>
+    <p>Inside <strong>validated_form_for</strong>, you can use:</p>
+    <ul>
+      <li><strong>validated_text_field</strong>;</li>
+      <li><strong>validated_text_area</strong>;</li>
+      <li><strong>validated_check_box</strong>;</li>
+      <li><strong>validated_radio_button</strong>;</li>
+      <li><strong>validated_select</strong>;</li>
+      <li><strong>validated_collection_select</strong>;</li>
+      <li><strong>validated_grouped_collection_select</strong>;</li>
+      <li>any of the normal form builder options for the fields you don't want to validate.</li>
+    </ul>
     <p>Validators:</p>
-      <ul>
-        <li><strong>presence</strong>;</li>
-        <li><strong>length</strong> (options: minimum, maximum, is);</li>
-        <li><strong>exclusion</strong> (options: in);</li>
-        <li><strong>inclusion</strong> (options: in);</li>
-        <li><strong>format</strong> (options: with, without); and</li>
-        <li><strong>numericality</strong> (options: greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, odd, even, only_integer);</li>
-        <li><strong>acceptance</strong>;</li>
-        <li><strong>confirmation</strong> (input and confirmation input <em>must</em> have matching ids).</li>
-      </ul>
-    <p>The <strong>allow_blank</strong> option is available on all validators. If you can include a custom message in your model validation, the same message will be used by Judge. Otherwise, error messages are taken from <code>I18n.t("errors.messages")</code>. This hasn't been extensively trialled in different I18n scenarios, but it has worked fine so far. If this is not flexible enough for you, please <a href="mailto:joe@tribesports.com">get in touch</a> and we can figure something out.</p>
+    <ul>
+      <li><strong>presence</strong>;</li>
+      <li><strong>length</strong> (options: minimum, maximum, is);</li>
+      <li><strong>exclusion</strong> (options: in);</li>
+      <li><strong>inclusion</strong> (options: in);</li>
+      <li><strong>format</strong> (options: with, without); and</li>
+      <li><strong>numericality</strong> (options: greater_than, greater_than_or_equal_to, less_than, less_than_or_equal_to, equal_to, odd, even, only_integer);</li>
+      <li><strong>acceptance</strong>;</li>
+      <li><strong>confirmation</strong> (input and confirmation input <em>must</em> have matching ids);</li>
+      <li>any custom validator you have used, provided you define it on the client side and add it to <a href="#customValidators"><code>judge.customValidators</code></a>.</li>
+    </ul>
+    <p>The <strong>allow_blank</strong> option is available everywhere it should be. If you can include a custom message in your model validation, the same message will be used by Judge. Otherwise, error messages are taken from <code>I18n.t("errors.messages")</code>. This hasn't been extensively trialled in different I18n scenarios, but it has worked fine so far. If this is not flexible enough for you, please <a href="mailto:joe@tribesports.com">get in touch</a> and we can figure something out.</p>
     <h3>What&rsquo;s not</h3>
     <p>The <strong>tokenizer</strong> option for the <strong>length</strong> validator is currently missing. Options like <strong>if</strong>, <strong>unless</strong> and <strong>on</strong>, which require more involved interactions with your Rails application, aren't really useful or viable on the client-side and are simply ignored. Validating <strong>uniqueness</strong> in a structured way is planned for the future &#8211; right now, you can define a <a href="#customValidators">custom validator</a> that makes an XMLHttpRequest if you need to.</p>
 
@@ -176,7 +190,7 @@ judge.customValidators.foo = function(options) {
   }
 };</pre>
       <p>Judge validator methods receive an <code>options</code> object and must return an object literal with properties <code>valid</code> (Boolean) and <code>messages</code> (an array of error messages, only necessary if <code>valid</code> is <strong>false</strong>).</p>
-      <p>The <code>options</code> object contains the validation options from your Ruby custom validator. It's likely that all you'll need is <code>options.message</code>, which is the validation error message you set in your model, but to get a better idea of what <code>options</code> has to offer, open up a browser console and take a look at the JSON stored in the <code>data-validate</code> attribute of any form element created with the judge helpers.</p>
+      <p>The <code>options</code> object contains the validation options from your Ruby custom validator. It's likely that all you'll need is <code>options.message</code>, which is the validation error message you set in your model, but to get a better idea of what <code>options</code> has to offer, open up a browser console and take a look at the JSON stored in the <code>data-validate</code> attribute of any form element created with the judge form builders.</p>
       <p>Validator methods have access to a variable named <code>instance</code>, which points to the watcher for the element being validated.  So <code>instance.element</code> gives you access to the element itself.</p>
       <p>Any validators added to <code>judge.customValidators</code> will be called automatically whenever a watcher <a href="#validators">validator</a> of the same name is detected. Phew!</p>
     </div>
@@ -248,14 +262,16 @@ judge.utils.isValidatable(document.getElementsByTagName('label')[0]); // => fals
     </div>
 
     <h2 id="tests">Tests</h2>
-    <p>There are integration tests for the Judge form helpers and the JavaScript is unit tested with Jasmine.</p>
+    <p>There are integration tests for the Judge form builders and the JavaScript is unit tested with Jasmine.</p>
+    <p>Judge uses Travis for continuous integration. Current status of master branch: <a href="http://travis-ci.org/joecorcoran/judge" class="clean"><img src="http://travis-ci.org/joecorcoran/judge.png" alt="Judge build status on Travis" /></a></p>
+    <p>To run the tests yourself:</p>
     <pre><span class="prompt">$</span> cd path/to/judge
 
 <span class="comment"># all tests, headless (requires phantom.js)</span>
 <span class="prompt">$</span> bundle exec rake test:all
 
-<span class="comment"># only helper tests</span>
-<span class="prompt">$</span> bundle exec rake test:helpers
+<span class="comment"># only form builder tests</span>
+<span class="prompt">$</span> bundle exec rake test:form
 
 <span class="comment"># only javascript tests, headless (requires phantom.js)</span>
 <span class="prompt">$</span> bundle exec rake test:js
@@ -264,7 +280,7 @@ judge.utils.isValidatable(document.getElementsByTagName('label')[0]); // => fals
 <span class="prompt">$</span> bundle exec rake jasmine:ci</pre>
 
     <h2 id="changelog">Changelog</h2>
-    <p><span class="version">0.3.0</span> Added confirmation and acceptance validation.</p>
+    <p><span class="version">0.3.0</span> Added confirmation and acceptance validation, more form builders.</p>
     <p><span class="version">0.2.0</span> Remove jQuery dependency; refactored to include new namespace, watchers and store; added headless testing.</p>
     <p><span class="version">0.1.1</span> Removed duplicate dependencies in gemspec.</p>
     <p><span class="version">0.1.0</span> First release.</p>
