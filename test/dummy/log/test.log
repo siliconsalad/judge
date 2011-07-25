@@ -1,0 +1,174 @@
+  [1m[36mSQL (0.6ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Rendered foos/new.html.erb within layouts/application (34.8ms)
+Completed 200 OK in 84ms (Views: 57.6ms | ActiveRecord: 0.9ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 7.5ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 7.6ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 10ms (Views: 8.2ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 7.7ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 11ms (Views: 8.9ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 7.7ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 11ms (Views: 9.3ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 53ms (Views: 52.1ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 7.3ms | ActiveRecord: 0.0ms)
+  [1m[36mSQL (0.6ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Rendered foos/new.html.erb within layouts/application (26.0ms)
+Completed 200 OK in 74ms (Views: 46.6ms | ActiveRecord: 0.9ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 7.2ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 10ms (Views: 8.7ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 14ms (Views: 11.7ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 14ms (Views: 11.7ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 10ms (Views: 8.3ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 8ms (Views: 7.1ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 7.7ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 62ms (Views: 60.7ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 7.7ms | ActiveRecord: 0.0ms)
+  [1m[36mSQL (0.6ms)[0m  [1m SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+[0m
+  [1m[35mSQL (0.2ms)[0m   SELECT name
+ FROM sqlite_master
+ WHERE type = 'table' AND NOT name = 'sqlite_sequence'
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Rendered foos/new.html.erb within layouts/application (27.0ms)
+Completed 200 OK in 57ms (Views: 30.2ms | ActiveRecord: 0.8ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 7.6ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 7.6ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 8.0ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 7.5ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 7.5ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 8ms (Views: 7.0ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 11ms (Views: 9.1ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 54ms (Views: 52.2ms | ActiveRecord: 0.0ms)
+  Processing by FoosController#new as HTML
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+WARNING: Can't mass-assign protected attributes: id
+Completed 200 OK in 9ms (Views: 7.3ms | ActiveRecord: 0.0ms)
