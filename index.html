@@ -68,7 +68,7 @@
 
   <div id="container">
 
-    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>0.3.0</small></h1>
+    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>0.3.1</small></h1>
 
     <div class="description">
       Easy client-side form validation for Rails 3
@@ -92,7 +92,7 @@
 
     <h2 id="installation">Installation</h2>
     <pre><span class="comment"># Gemfile</span>
-gem "judge", "~> 0.3.0"</pre>
+gem "judge", "~> 0.3.1"</pre>
     <pre><span class="prompt">$</span> cd path/to/your/app
 <span class="prompt">$</span> bundle install</pre>
     <p>To copy judge.js to your public/javascripts directory, do:</p>
@@ -279,6 +279,7 @@ judge.utils.isValidatable(document.getElementsByTagName('label')[0]); // => fals
 <span class="prompt">$</span> bundle exec rake jasmine:ci</pre>
 
     <h2 id="changelog">Changelog</h2>
+    <p><span class="version">0.3.1</span> Removed unused keys from validator options in data attributes. Include Judge::FormHelper in ApplicationHelper to avoid clash with haml aliases.</p>
     <p><span class="version">0.3.0</span> Added confirmation and acceptance validation, more form builders.</p>
     <p><span class="version">0.2.0</span> Remove jQuery dependency; refactored to include new namespace, watchers and store; added headless testing.</p>
     <p><span class="version">0.1.1</span> Removed duplicate dependencies in gemspec.</p>
