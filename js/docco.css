@@ -116,9 +116,9 @@ table td {
     vertical-align: top;
     background: #C6C7AB;
     /*border-left: 1px solid #ADAE8F;*/
-    moz-box-shadow: inset 5px 0px 5px -2px #adae8f;
-    -webkit-box-shadow: inset 5px 0px 5px -2px #adae8f;
-    box-shadow: inset 5px 0px 5px -2px #adae8f;
+    moz-box-shadow: inset 10px 0 10px -10px #adae8f;
+    -webkit-box-shadow: inset 10px 0 10px -10px #adae8f;
+    box-shadow: inset 10px 0 10px -10px #adae8f;
     
   }
     pre, tt, code {
