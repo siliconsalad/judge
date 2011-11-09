@@ -1,0 +1,12 @@
+rvm:
+  - 1.9.2
+
+script: "bundle exec rake test:form"
+
+notifications:
+  recipients:
+    - joe@tribesports.com
+
+branches:
+  only:
+    - master

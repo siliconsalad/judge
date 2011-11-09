@@ -1,1 +1,8 @@
-*.swp
+*.gem
+.bundle
+Gemfile.lock
+pkg/*
+docs
+doc
+rdoc
+gem_graph.png
