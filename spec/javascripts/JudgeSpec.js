@@ -145,8 +145,8 @@ describe('judge', function() {
         expect(_(results).first().element).toEqual(e);
       });
 
-      it('returns null if key is not passed', function() {
-        var results = judge.store.validate();
+      it('returns null if no elements found', function() {
+        var results = judge.store.validate('mykey');
         expect(results).toBe(null);
       });
 
@@ -156,8 +156,8 @@ describe('judge', function() {
       
       it('removes Watcher from store', function() {
         judge.store.save('mykey', e);
-        expect(judge.store.remove('mykey', e)).not.toEqual(null);
-        expect(judge.store.get('mykey').length).toEqual(0);
+        expect(_(judge.store.remove('mykey', e)).isUndefined()).toEqual(true);
+        expect(judge.store.get('mykey')).toBe(null);
       });
 
       it('returns null if key not found', function() {
@@ -179,12 +179,12 @@ describe('judge', function() {
         judge.store.save('mykey', e);
         judge.store.save('mykey2', e);
         judge.store.clear('mykey');
-        expect(judge.store.get('mykey')).toEqual([]);
+        expect(judge.store.get('mykey')).toBe(null);
         expect(judge.store.get('mykey2').length).toEqual(1);
       });
 
       it('returns null if key not found', function() {
-        expect(judge.store.clear('notakey')).toEqual(null);
+        expect(judge.store.clear('notakey')).toBe(null);
       });
 
     });
