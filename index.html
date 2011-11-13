@@ -246,7 +246,7 @@ judge.store.getDOM();
   // => { mykey: [ HTMLInputElement ], mykey2: [ HTMLInputElement &hellip; ] }</pre>
 
       <h5>validate <code>judge.store.validate(key)</code></h5>
-      <p>A shortcut for <code>judge.validate(judge.store.getDOM(key))</code>. Validate all elements stored within watchers against the given key. Returns <code>null</code> if no key is passed.</p>
+      <p>A shortcut for <code>judge.validate(judge.store.getDOM(key))</code>. Validate all elements stored within watchers against the given key. Returns <code>null</code> if no key is passed or no watchers are found.</p>
       <pre class="sh_javascript">judge.store.validate('mykey');
 // => [ { valid:true, messages:[], element:HTMLInputElement },
 //      { valid:false, messages:['must be even'], element:HTMLInputElement } ]
@@ -254,7 +254,7 @@ judge.store.getDOM();
 judge.store.validate();
   // => null</pre>
       <h5>remove <code>judge.store.remove(key, element)</code></h5>
-      <p>Remove individual stored watcher. Returns store object after watcher was removed. If you want to remove all watchers stored against a key, or all stored watchers, use the <a href="#clear"><code>clear</code></a> method.</p>
+      <p>Remove individual stored watcher. Returns remaining watchers stored at key, or <code>undefined</code> if none remain (store property is then deleted). If you want to remove all watchers stored against a key, or all stored watchers, use the <a href="#clear"><code>clear</code></a> method.</p>
       <pre class="sh_javascript">judge.store.remove('mykey', document.getElementById('foo'));
   // => { mykey:[ &hellip; ], mykey2:[ &hellip; ] }</pre>
       <h5 id="clear">clear <code>judge.store.clear(key)</code></h5>
