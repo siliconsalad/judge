@@ -134,12 +134,20 @@ describe('judge', function() {
     });
 
     describe('validate', function() {
+
+      beforeEach(function () {
+        judge.store.save('mykey', e);
+      })
       
       it('validates all elements stored against key', function() {
-        judge.store.save('mykey', e);
         var results = judge.store.validate('mykey');
         expect(_(results).first()).toBeInstanceOf(Object);
         expect(_(results).first().element).toEqual(e);
+      });
+
+      it('returns null if key is not passed', function() {
+        var results = judge.store.validate();
+        expect(results).toBe(null);
       });
 
     });
@@ -518,24 +526,6 @@ describe('judge', function() {
   });
 
   describe('utils', function() {
-
-    describe('isValidatable', function() {
-      
-      it('returns true if judge can validate object', function() {
-        var i = document.createElement('input'),
-            s = document.createElement('select'),
-            t = document.createElement('textarea');
-        expect(judge.utils.isValidatable(i)).toEqual(true);
-        expect(judge.utils.isValidatable(s)).toEqual(true);
-        expect(judge.utils.isValidatable(t)).toEqual(true);
-      });
-
-      it('returns false otherwise', function() {
-        var p = document.createElement('p');
-        expect(judge.utils.isValidatable(p)).toEqual(false);
-      });
-
-    });
 
     describe('isCollection', function() {
       
