@@ -288,10 +288,10 @@ judge.store.clear();
     <p>Judge uses Travis for continuous integration. Current status of master branch: <a href="http://travis-ci.org/joecorcoran/judge" class="clean"><img src="http://travis-ci.org/joecorcoran/judge.png" alt="Judge build status on Travis" /></a></p>
     <p>Since Travis is still quite young, you might want to run the tests yourself:</p>
     <pre><span class="comment"># All tests, JavaScript tests headlessly (requires phantom.js)</span>
-<span class="prompt">$</span> bundle exec rake test
+<span class="prompt">$</span> bundle exec rake
 
 <span class="comment"># Only Ruby tests</span>
-<span class="prompt">$</span> bundle exec rake test:ruby
+<span class="prompt">$</span> bundle exec rake spec
 
 <span class="comment"># Only JavaScript tests, headless (requires phantom.js)</span>
 <span class="prompt">$</span> bundle exec rake jasmine:phantom
