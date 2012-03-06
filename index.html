@@ -56,7 +56,7 @@
     ul li, ol li { line-height:25px; }
     span.comment { font-style:italic; color:#777; }
     ul.menu {
-      width:740px;
+      width:800px;
       position:fixed; top:0; left:0;
       list-style-type:none; margin:0 auto; padding:0; background:#333;
       border-radius:0 0 5px 0;
@@ -91,6 +91,7 @@
     <li><a href="#ruby">Ruby</a></li>
     <li><a href="#js">JavaScript</a></li>
     <li><a href="#tests">Tests</a></li>
+    <li><a href="#extensions">Extensions</a></li>
     <li><a href="#changelog">Changelog</a></li>
   </ul>
 
@@ -122,10 +123,10 @@
       <li><strong>public/javascripts/judge.js</strong></li>
     </ul>
     <p>The only option is <strong>--no-dep</strong>, which prevents the generator from copying <a href="http://documentcloud.github.com/underscore/">Underscore.js</a> and <a href="https://github.com/douglascrockford/JSON-js">json2.js</a> into your chosen directory if you already have them.</p>
-    <h3>Rails 3.0</h3>
+    <h3>Rails 3.0.x</h3>
     <pre><span class="prompt">$</span> rails generate judge</pre>
     <p>Then do whatever it is you usually do to ensure that JavaScript files are included properly (e.g. add them to <strong>assets.yml</strong> if you are using <a href="http://documentcloud.github.com/jammit/">Jammit</a>).</p>
-    <h3>Rails 3.1</h3>
+    <h3>Rails 3.1 and above</h3>
     <p>Run the generator as follows to copy judge.js and its dependencies to your app:</p>
     <pre><span class="prompt">$</span> rails generate judge app/assets/javascripts</pre>
     <p>These files should now be included, thanks to the following line in your manifest file (<strong>app/assets/javascripts/application.js</strong>):</p>
@@ -298,6 +299,23 @@ judge.store.clear();
 
 <span class="comment"># Only JavaScript tests, with Selenium</span>
 <span class="prompt">$</span> bundle exec rake jasmine:ci</pre>
+
+    <h2 id="extensions">Extensions</h2>
+    <p>If you use <a href="https://github.com/justinfrench/formtastic">Formtastic</a> or <a href="https://github.com/plataformatec/simple_form">SimpleForm</a>, there are extension gems to help you use Judge within your forms without any extra setup. They are essentially basic patches that add the <code>:validate => true</code> option to the FormBuilder <code>input</code> method.</p>
+    <div class="indent">
+      <h3>Formtastic</h3>
+      <p><a href="https://github.com/joecorcoran/judge-formtastic">https://github.com/joecorcoran/judge-formtastic</a></p>
+      <pre>gem "judge-formtastic", "~> x.x.x", :require => "judge/formtastic"</pre>
+      <pre class="sh_ruby"><%= semantic_form_for(@user) do |f| %>
+    <%= f.input :name, :validate => true %>
+  <% end %></pre>
+      <h3>SimpleForm</h3>
+      <p><a href="https://github.com/joecorcoran/judge-simple_form">https://github.com/joecorcoran/judge-simple_form</a></p>
+      <pre>gem "judge-simple_form", "~> x.x.x", :require => "judge/simple_form"</pre>
+      <pre class="sh_ruby"><%= simple_form_for(@user) do |f| %>
+    <%= f.input :name, :validate => true %>
+  <% end %></pre>
+    </div>
     
     <div class="changelog">
       <h2 id="changelog">Changelog</h2>
