@@ -6,7 +6,7 @@
 
   <meta charset="utf-8">
 
-  <title>Judge :: Simple client side validation for Rails 3 :: joecorcoran</title>
+  <title>Judge :: Simple client side validation for Rails 3</title>
 
   <link href="styles/sh_darkness.css" rel="stylesheet" type="text/css" />
   <script src="scripts/sh_main.min.js" type="text/javascript"></script>
@@ -97,7 +97,7 @@
 
   <div id="container">
 
-    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>1.1.0</small></h1>
+    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>1.2.0</small></h1>
 
     <p class="description">
       Simple client side form validation for Rails 3
@@ -111,7 +111,7 @@
 
     <h2 id="installation">Installation</h2>
     <p>Add the following to your Gemfile:</p>
-    <pre>gem "judge", "~> 1.1.0"</pre>
+    <pre>gem "judge", "~> 1.2.0"</pre>
     <p>and then run:</p>
     <pre><span class="prompt">$</span> bundle install</pre>
     <p>To copy the Judge JavaScript files to your app, use the generator:</p>
@@ -215,15 +215,17 @@ end</pre>
 <% end %></pre>
       <p>Then Judge will expect a method named <code>foo</code> to have been added to <code>judge.customValidators</code>:</p>
       <pre class="sh_javascript">// on the client side
-judge.customValidators.foo = function(options, messages) {
-  // do your foo checking here
+judge.customValidators.foo = function(value, options, messages) {
+  var errorMessages = [];
+  if (value !== "foo") {
+    errorMessages.push("Should be foo");
+  }
+  return errorMessages;
 };</pre>
-      <p>Judge validator methods receive an <code>options</code> object and a <code>messages</code> object and must return an object literal with properties <code>valid</code> (Boolean) and <code>messages</code> (an array of error messages, only necessary if <code>valid</code> is <strong>false</strong>).</p>
-      <p>The <code>options</code> object contains the validation options from your Ruby custom validator. To get a better idea of what <code>options</code> has to offer, open up a browser console and take a look at the JSON stored in the <code>data-validate</code> attribute of any form element created with the Judge form builders.</p>
-      <p>The <code>messages</code> object contains all possible error messages for this attribute.</p>
-      <p>Validator methods have access to a variable named <code>watcher</code>, which points to the watcher for the element being validated.  So <code>watcher.element</code> gives you access to the element itself.</p>
-      <p>Any validators added to <code>judge.customValidators</code> will be called automatically whenever a watcher <a href="#validators">validator</a> of the same name is detected. Phew!</p>
-    </div>
+      <p>Judge validator methods receive the form element <code>value</code> and the validator <code>options</code> as defined in your model. The third parameter, <code>messages</code>, is currently only used by the ported <code>ActiveModel</code> validator methods and will be empty in custom validator methods.</p>
+      <p>Any validators added to <code>judge.customValidators</code> will be called automatically whenever a watcher <a href="#validators">validator</a> of the same name is detected.</p>
+      <p>Custom validator methods must return an array of error messages. If the value is valid, they must return an empty array.</p>
+  </div>
     <h3>judge.Watcher</h3>
     <p>Constructor for watchers.  Watchers are wrapper objects that contain a DOM element and various validation methods. The constructor takes one argument, a DOM element</a>. For example:</p>
     <pre class="sh_javascript">var watcher = new judge.Watcher(document.getElementById('foo'));</pre>
@@ -319,13 +321,14 @@ judge.store.clear();
     
     <div class="changelog">
       <h2 id="changelog">Changelog</h2>
-      <p class="one"><span class="version">1.1.0</span> Fixed incorrect Enumerable implementation in ValidatorCollection. Lots more internal tidying, including extraction of HTML attribute building.</p>
+      <p class="one"><span class="version">1.2.0</span> Changes to the format of validator functions; improved method of including custom validators; updated dependencies; fixed RegExp flag bug.</p>
+      <p class="two"><span class="version">1.1.0</span> Fixed incorrect Enumerable implementation in ValidatorCollection. Lots more internal tidying, including extraction of HTML attribute building.</p>
       <p class="two"><span class="version">1.0.0</span> Validator code extracted into classes; Form builder methods no longer require &ldquo;validated_&rdquo; prefix; Added <code>judge.store.validate()</code> shortcut method; Some minor implementation updates to judge.js; No more dummy app in tests, no more crappy Gemfile, no more Jeweler.</p>
-      <p class="two"><span class="version">0.5.0</span> Error messages looked up through Rails i18n.</p>
+      <p class="three"><span class="version">0.5.0</span> Error messages looked up through Rails i18n.</p>
       <p class="three"><span class="version">0.4.3</span> IE bug fixes: No longer checking for element type in the Watcher constructor, to avoid IE object string "quirk"; now using <code>typeof</code> to check for undefined properties of <code>window</code>.</p>
-      <p class="three"><span class="version">0.4.2</span> Fixed bug introduced in the last bug fix &#8211; now <em>globally</em> replacing double slashes :)</p>
+      <p class="four"><span class="version">0.4.2</span> Fixed bug introduced in the last bug fix &#8211; now <em>globally</em> replacing double slashes :)</p>
       <p class="four"><span class="version">0.4.1</span> Fixed slash escaping bug in judge.js RegExp converter; removed uniqueness data from data attributes to prevent judge.js from expecting a validation method.</p>
-      <p class="four"><span class="version">0.4.0</span> Added new form builders.</p>
+      <p><span class="version">0.4.0</span> Added new form builders.</p>
       <p><span class="version">0.3.1</span> Removed unused keys from validator options in data attributes. Include Judge::FormHelper in ApplicationHelper to avoid clash with haml aliases.</p>
       <p><span class="version">0.3.0</span> Added confirmation and acceptance validation, more form builders.</p>
       <p><span class="version">0.2.0</span> Remove jQuery dependency; refactored to include new namespace, watchers and store; added headless testing.</p>
