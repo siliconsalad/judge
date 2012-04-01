@@ -263,7 +263,7 @@ judge.customValidators.foo = function(value, options, messages) {
       <pre class="sh_javascript">judge.store.save('mykey', document.getElementById('foo'));
   // => [ { element:HTMLInputElement, &hellip; } ]
 
-judge.store.save('mykey', document.getElementByTagName('input'));
+judge.store.save('mykey', document.getElementsByTagName('input'));
   // => [ { element:HTMLInputElement, &hellip; }, { element:HTMLInputElement, &hellip; }, &hellip; ]</pre>
       <h5>get <code>judge.store.get(key)</code></h5>
       <p>Return an array of watchers saved against the key. If no key is given, the store object is returned.</p>
@@ -295,8 +295,10 @@ judge.store.validate();
   // => { mykey:[ &hellip; ], mykey2:[ &hellip; ] }</pre>
       <h5 id="clear">clear <code>judge.store.clear(key)</code></h5>
       <p>Remove all watchers stored against a key or, if no key is given, all stored watchers. Returns store object after watchers were removed.</p>
-      <pre class="sh_javascript">judge.store.clear('mykey');
-  // => { mykey:[], &hellip; }
+      <pre class="sh_javascript">judge.store.save('inputs', document.getElementsByTagName('input'));
+judge.store.save('textareas', document.getElementsByTagName('textarea'));
+judge.store.clear('inputs');
+  // => { textareas: [ HTMLInputElement &hellip; ] }
 judge.store.clear();
   // => {} </pre>
     </div>
