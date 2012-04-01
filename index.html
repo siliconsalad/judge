@@ -97,7 +97,7 @@
 
   <div id="container">
 
-    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>1.2.0</small></h1>
+    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>1.3.0</small></h1>
 
     <p class="description">
       Simple client side form validation for Rails 3
@@ -111,7 +111,7 @@
 
     <h2 id="installation">Installation</h2>
     <p>Add the following to your Gemfile:</p>
-    <pre>gem "judge", "~> 1.2.0"</pre>
+    <pre>gem "judge", "~> 1.3.0"</pre>
     <p>and then run:</p>
     <pre><span class="prompt">$</span> bundle install</pre>
     <p>To copy the Judge JavaScript files to your app, use the generator:</p>
@@ -190,11 +190,18 @@ end</pre>
     <p>The global namespace.</p>
     <div class="indent">
       <h4>Static methods</h4>
-      <h5>validate <code>judge.validate(elements)</code></h5>
+      <h5>validate <code>judge.validate(elements, [callback])</code></h5>
       <p>Perform quick and easy validation on a single element or an array of elements (including array-like collections such as <code>NodeList</code>), without making public any watchers. An array of objects is returned, each object containing the validated element, a Boolean <code>valid</code> flag and an array of error messages, which is empty if <code>valid</code> is true.</p>
       <pre class="sh_javascript">judge.validate(document.getElementsByTagName('input'));
   // => [ { valid:true, messages:[], element:HTMLInputElement },
   //      { valid:false, messages:['must be even'], element:HTMLInputElement } ]</pre>
+      <p>The callback function, if provided, will be executed once for each element passed in the first argument. The callback receives three arguments: <code>(valid, messages, element)</code>.</p>
+      <pre class="sh_javascript">var elements = document.querySelectorAll('input[type=text]');
+judge.validate(elements, function(valid, messages, element) {
+  if (!valid) {
+    element.style.border = '1px solid red';
+  }
+});</pre>
       <h4>Static properties</h4>
       <h5 id="customValidators">customValidators <code>judge.customValidators</code></h5>
       <p>An empty object. Add your own validators here. Let's say you have something like this set up:</p>
@@ -231,10 +238,16 @@ judge.customValidators.foo = function(value, options, messages) {
     <pre class="sh_javascript">var watcher = new judge.Watcher(document.getElementById('foo'));</pre>
     <div class="indent">
       <h4>Instance methods</h4>
-      <h5>validate <code>watcher.validate()</code></h5>
+      <h5>validate <code>watcher.validate([callback])</code></h5>
       <p>Validate the current value of the wrapped DOM element. An object is returned, containing the validated element, a Boolean <code>valid</code> flag and an array of error messages, which is empty if <code>valid</code> is true.</p>
       <pre class="sh_javascript">watcher.validate();
   // => { valid:false, messages:['must be even'], element:HTMLInputElement }</pre>
+      <p>The callback function, if provided, receives three arguments: <code>(valid, messages, element)</code>.</p>
+      <pre class="sh_javascript">watcher.validate(function(valid, messages, element) {
+  if (!valid) {
+    element.style.border = '1px solid red';
+  }
+});</pre>
       <h4>Instance properties</h4>
       <h5 id="validators">validators <code>watcher.validators</code></h5>
       <p>Returns an array of validators (JavaScript object representations of the associated <code>ActiveModel</code> validators) for the wrapped element.</p>
@@ -321,13 +334,14 @@ judge.store.clear();
     
     <div class="changelog">
       <h2 id="changelog">Changelog</h2>
-      <p class="one"><span class="version">1.2.0</span> Changes to the format of validator functions; improved method of including custom validators; updated dependencies; fixed RegExp flag bug.</p>
+      <p class="one"><span class="version">1.3.0</span> Validate methods now accept callbacks; judge.utils removed in favour of functions within a closure; some specs were tidied/deleted as appropriate.</p>
+      <p class="two"><span class="version">1.2.0</span> Changes to the format of validator functions; improved method of including custom validators; updated dependencies; fixed RegExp flag bug.</p>
       <p class="two"><span class="version">1.1.0</span> Fixed incorrect Enumerable implementation in ValidatorCollection. Lots more internal tidying, including extraction of HTML attribute building.</p>
-      <p class="two"><span class="version">1.0.0</span> Validator code extracted into classes; Form builder methods no longer require &ldquo;validated_&rdquo; prefix; Added <code>judge.store.validate()</code> shortcut method; Some minor implementation updates to judge.js; No more dummy app in tests, no more crappy Gemfile, no more Jeweler.</p>
+      <p class="three"><span class="version">1.0.0</span> Validator code extracted into classes; Form builder methods no longer require &ldquo;validated_&rdquo; prefix; Added <code>judge.store.validate()</code> shortcut method; Some minor implementation updates to judge.js; No more dummy app in tests, no more crappy Gemfile, no more Jeweler.</p>
       <p class="three"><span class="version">0.5.0</span> Error messages looked up through Rails i18n.</p>
-      <p class="three"><span class="version">0.4.3</span> IE bug fixes: No longer checking for element type in the Watcher constructor, to avoid IE object string "quirk"; now using <code>typeof</code> to check for undefined properties of <code>window</code>.</p>
+      <p class="four"><span class="version">0.4.3</span> IE bug fixes: No longer checking for element type in the Watcher constructor, to avoid IE object string "quirk"; now using <code>typeof</code> to check for undefined properties of <code>window</code>.</p>
       <p class="four"><span class="version">0.4.2</span> Fixed bug introduced in the last bug fix &#8211; now <em>globally</em> replacing double slashes :)</p>
-      <p class="four"><span class="version">0.4.1</span> Fixed slash escaping bug in judge.js RegExp converter; removed uniqueness data from data attributes to prevent judge.js from expecting a validation method.</p>
+      <p><span class="version">0.4.1</span> Fixed slash escaping bug in judge.js RegExp converter; removed uniqueness data from data attributes to prevent judge.js from expecting a validation method.</p>
       <p><span class="version">0.4.0</span> Added new form builders.</p>
       <p><span class="version">0.3.1</span> Removed unused keys from validator options in data attributes. Include Judge::FormHelper in ApplicationHelper to avoid clash with haml aliases.</p>
       <p><span class="version">0.3.0</span> Added confirmation and acceptance validation, more form builders.</p>
