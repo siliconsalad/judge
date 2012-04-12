@@ -2,87 +2,17 @@
 <html>
 <head>
 
-  <link href="http://fonts.googleapis.com/css?family=Goudy+Bookletter+1911&v1" rel="stylesheet" type="text/css">
+  <link href='http://fonts.googleapis.com/css?family=Josefin+Sans' rel='stylesheet' type='text/css'>
 
   <meta charset="utf-8">
 
   <title>Judge :: Simple client side validation for Rails 3</title>
 
-  <link href="styles/sh_darkness.css" rel="stylesheet" type="text/css" />
-  <script src="scripts/sh_main.min.js" type="text/javascript"></script>
-  <script src="scripts/sh_javascript.js" type="text/javascript"></script>
-  <script src="scripts/sh_ruby.js" type="text/javascript"></script>
-
-  <style type="text/css">
-    body {
-      margin:0 40px;
-      background-color: #EAEBD5;
-      font-family: 'Helvetica Neue', Helvetica, Arial, FreeSans, san-serif;
-      font-size:92%;
-      color: #333;
-    }
-    #container {
-      margin: 60px 0;
-      width: 700px;
-    }
-    h1, h2, h3, h4, h5, .description, .version { font-family:"Goudy Bookletter 1911", Georgia, Times New Roman, serif; font-weight:normal; }
-    h1 { font-size: 5.5em; color: #222; margin:0 6px 15px; }
-    h1 small { font-size: 0.3em; }
-    h1 a { text-decoration: none; background:transparent; }
-    h2 { font-size: 2.5em; color: #222; margin:0; padding:60px 0 0; letter-spacing:1px; }
-    h3, h4, h5 { color: #222; font-size:2em; margin:40px 0 0; }
-    h3.nospace { margin-top:15px; }
-    h4 { font-size:1.5em; margin:20px 0 0; }
-    h5 { font-size:1.3em; margin:20px 0 0; }
-    h5 code { color:#666; padding-left:10px; font-weight:normal; font-size:0.9em; }
-    p { line-height:1.8em; margin:10px 0 0; }
-    a { color: #000; }
-    a.clean { background:none; padding:0; }
-    a:hover { text-decoration:none; }
-    p.description { font-size: 1.2em; margin: 10px 0 30px; color:#555; letter-spacing:1px; }
-    .download { float: right; }
-    pre {
-      background: #C6C7AB; color: #000; line-height:1.5em; margin:10px 0 30px; padding: 15px;
-      border-radius:3px;
-      moz-box-shadow: inset 0 0 2px 2px #adae8f;
-      -webkit-box-shadow: inset 0 0 2px 2px #adae8f;
-      box-shadow: inset 0 0 2px 2px #adae8f;
-    }
-    hr { border: 0; width: 80%; border-bottom: 1px solid #aaa}
-    .footer { margin:60px 0 30px; border-top:1px solid #C6C7AB; }
-    code, pre { font-size:1.2em; color:#000; }
-    p code, li code { background-color:#C6C7AB; padding:3px; border-radius:2px; }
-    span.prompt { color:#555; }
-    ul li, ol li { line-height:25px; }
-    span.comment { font-style:italic; color:#777; }
-    ul.menu {
-      width:800px;
-      position:fixed; top:0; left:0;
-      list-style-type:none; margin:0 auto; padding:0; background:#333;
-      border-radius:0 0 5px 0;
-      moz-box-shadow: 0 0 2px 2px #adae8f;
-      -webkit-box-shadow: 0 0 2px 2px #adae8f;
-      box-shadow: 0 0 2px 2px #adae8f;
-    }
-    ul.menu li { display:inline; margin:0 0 0 20px; padding:0; }
-    ul.menu li a {
-      font-family:"Goudy Bookletter 1911", Georgia, Times New Roman, serif;
-      font-size:18px;
-      color:#EAEBD5; background:transparent; padding:6px 0; display:inline-block; text-decoration:none;
-    }
-    ul.menu li a:hover { text-decoration:underline; }
-    ul.menu li.first { margin:0 0 0 40px; }
-    div.indent { padding-left:20px; border-left:2px solid #C6C7AB; }
-    .version { font-size:1.3em; padding-right:10px; color:#000; }
-    .changelog p, .changelog p *             { color:rgba(51, 51, 51, 0.4); }
-    .changelog p.four, .changelog p.four *   { color:rgba(51, 51, 51, 0.55); }
-    .changelog p.three, .changelog p.three * { color:rgba(51, 51, 51, 0.7); }
-    .changelog p.two, .changelog p.two *     { color:rgba(51, 51, 51, 0.85); }
-    .changelog p.one, .changelog p.one *     { color:rgba(51, 51, 51, 1); }
-  </style>
+  <link href="styles/solarized_dark.css" rel="stylesheet" type="text/css" />
+  <link href="styles/main.css" rel="stylesheet" type="text/css" />
 </head>
 
-<body onload="sh_highlightDocument();">
+<body>
 
   <ul class="menu">
     <li class="first"><a href="#dependencies">Dependencies</a></li>
@@ -97,7 +27,7 @@
 
   <div id="container">
 
-    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>1.4.0</small></h1>
+    <h1><a href="http://github.com/joecorcoran/judge">Judge</a> <small>1.5.0</small></h1>
 
     <p class="description">
       Simple client side form validation for Rails 3
@@ -111,11 +41,11 @@
 
     <h2 id="installation">Installation</h2>
     <p>Add the following to your Gemfile:</p>
-    <pre>gem "judge", "~> 1.4.0"</pre>
+    <pre><code class="no-highlight">gem "judge", "~> 1.5.0"</code></pre>
     <p>and then run:</p>
-    <pre><span class="prompt">$</span> bundle install</pre>
+    <pre><code class="no-highlight"><span class="prompt">$</span> bundle install</code></pre>
     <p>To copy the Judge JavaScript files to your app, use the generator:</p>
-    <pre><span class="prompt">$</span> rails generate judge [path] [options]</pre>
+    <pre><code class="no-highlight"><span class="prompt">$</span> rails generate judge [path] [options]</code></pre>
     <p>The path parameter is optional and defaults to <strong>public/javascripts</strong>.  So running the generator without specifying a path and with no options will give you:</p>
     <ul>
       <li><strong>public/javascripts/underscore.js</strong></li>
@@ -124,39 +54,44 @@
     </ul>
     <p>The only option is <strong>--no-dep</strong>, which prevents the generator from copying <a href="http://documentcloud.github.com/underscore/">Underscore.js</a> and <a href="https://github.com/douglascrockford/JSON-js">json2.js</a> into your chosen directory if you already have them.</p>
     <h3>Rails 3.0.x</h3>
-    <pre><span class="prompt">$</span> rails generate judge</pre>
+    <pre><code class="no-highlight"><span class="prompt">$</span> rails generate judge</code></pre>
     <p>Then do whatever it is you usually do to ensure that JavaScript files are included properly (e.g. add them to <strong>assets.yml</strong> if you are using <a href="http://documentcloud.github.com/jammit/">Jammit</a>).</p>
     <h3>Rails 3.1 and above</h3>
     <p>Run the generator as follows to copy judge.js and its dependencies to your app:</p>
-    <pre><span class="prompt">$</span> rails generate judge app/assets/javascripts</pre>
+    <pre><code class="no-highlight"><span class="prompt">$</span> rails generate judge app/assets/javascripts</code></pre>
     <p>These files should now be included, thanks to the following line in your manifest file (<strong>app/assets/javascripts/application.js</strong>):</p>
-    <pre class="sh_javascript">//= require_tree .</pre>
+    <pre><code class="javascript">//= require_tree .</code></pre>
     <p>If you ever come across problems with your require order, you can ensure that Judge's dependencies are required first by doing something like this:</p>
-    <pre class="sh_javascript">//= require underscore
+    <pre><code class="javascript">//= require underscore
 //= require json2
-//= require_tree .</pre>
+//= require_tree .</code></pre>
     
     <h2 id="quick-start">Quick start</h2>
-    <p>As of version 1, Judge form builder methods are no longer prefixed with &ldquo;validated_&rdquo;.  The syntax is now in line with standard Rails form builders, as follows:</p>
-
-    <pre class="sh_ruby"><%= form_for(@post, :builder => Judge::FormBuilder) do |f|%>
+    <p>Add some validation to your model:</p>
+    <pre><code class="ruby">class Post < ActiveRecord::Base
+  validates :title, :presence => true
+end</code></pre>
+    <p>Make sure your form uses the <code>Judge::FormBuilder</code> and add the <code>:validate</code> option to the field:</p>
+    <pre><code class="ruby"><%= form_for(@post, :builder => Judge::FormBuilder) do |f|%>
   <%= f.text_field :title, :validate => true %>
-  <%= f.text_area :body, :validate => true %>
-<% end %></pre>
+<% end %></code></pre>
 
     <p>Most Judge functionality on the client side is based on the use of watchers.  A watcher is a sort of pointer object for a DOM element. Create a watcher for an <code>input</code> element:</p>
-    <pre class="sh_javascript">var watcher = new judge.Watcher(document.getElementById('foo'));</pre>
+    <pre><code class="javascript">var watcher = new judge.Watcher(document.getElementById('post_title'));</code></pre>
 
-    <p>Check whether the value of the watched <code>input</code> element is valid &#8211; this checks validity at the time you call <code>validate()</code>, not the time at which the watcher was instantiated:</p>
-    <pre class="sh_javascript">watcher.validate().valid; // => true </pre>
+    <p>Validate the watched element and give some simple visual feedback &#8211; this checks validity at the time you call <code>validate()</code>, not the time at which the watcher was instantiated:</p>
+    <pre><code class="javascript">watcher.validate(function(valid, messages, element) {
+  if (!valid) {
+    element.style.border = '1px solid red';
+  }
+});</code></pre>
 
     <p>If you want to do a quick validation and see no benefit in creating a watcher, you can do that too. This example will validate all <code>input</code> elements on the page, provided they have been created with <code>Judge::FormBuilder</code>:</p>
-    <pre class="sh_javascript">judge.validate(document.getElementsByTagName('input'));
-  // => [ { valid:true, messages:[], element:HTMLInputElement },
-  //      { valid:false, messages:['must be even'], element:HTMLInputElement } ]</pre>
+    <pre><code class="javascript">judge.validate(document.getElementsByTagName('input'));
+  // => [ { valid:false, messages:["can't be blank"], element:HTMLInputElement }, ... ]</code></pre>
+    <p><code>judge.validate</code> accepts a callback function too, which is called once for every element passed in the first argument.</p>
 
     <h2 id="ruby">Ruby</h2>
-    <h3 class="nospace">What&rsquo;s available</h3>
     <p>You can use any of the standard form builders from <code>ActionView::Helpers::FormBuilder</code> &#8211; just add <code>:validate => true</code> to the options hash.</p>
     <p>Validators:</p>
     <ul>
@@ -172,10 +107,42 @@
     </ul>
     <p>The <strong>allow_blank</strong> option is available everywhere it should be. Error messages are <a href="http://guides.rubyonrails.org/i18n.html#translations-for-active-record-models">looked up according to the Rails i18n API</a>.</p>
     <p>If you have any custom form builders defined that inherit from <code>ActionView::Helpers::FormBuilder</code> in your app, you could make them validatable on the client side by inheriting <code>Judge::FormBuilder</code> instead:</p>
-    <pre class="sh_ruby">class MyCustomFormBuilder < Judge::FormBuilder
+    <pre><code class="ruby">class MyCustomFormBuilder < Judge::FormBuilder
   # methods like text_field, text_area etc. go here
-end</pre>
-    <h3>What&rsquo;s not</h3>
+end</code></pre>
+    <h3>Custom validators</h3>
+    <p>If you create a custom <code>EachValidator</code>, Judge provides a way to ensure that your I18n error messages are available on the client side. Simply pass to <code>declare_messages</code> any number of message keys and Judge will look up the translated messages. Let's run through an example.</p>
+    <pre><code class="ruby"># autoload this file 
+class FooValidator < ActiveModel::EachValidator
+  declare_messages :not_foo
+
+  def validate_each(record, attribute, value)
+    unless value == "foo"
+      record.errors.add(:title, :not_foo)
+    end
+  end
+end</code></pre>
+    <p>We'll use the validator in the example above to validate the <code>title</code> attribute of a <code>Post</code> object:
+    <pre><code class="ruby"># your model
+class Post < ActiveRecord::Base
+  validates :title, :foo => true
+end</code></pre>
+    <pre><code class="ruby"># your view
+<%= form_for(@post, :builder => Judge::FormBuilder) do |f| %>
+  <%= text_field :title, :validate => true %>
+<% end %></code></pre>
+    <p>Judge will look for the <code>not_foo</code> message at </p>
+    <pre><code>activerecord.errors.models.post.attributes.title.not_foo</code></pre>
+    <p>first and then onwards down the <a href="http://guides.rubyonrails.org/i18n.html#translations-for-active-record-models">Rails I18n lookup chain</a>.</p>
+    <p>Our client side validator would then look something like this:</p>
+    <pre><code class="javascript">judge.customValidators.foo = function(value, options, messages) {
+  var errorMessages = [];
+  if (value !== "foo") {
+    errorMessages.push(messages.not_foo);
+  }
+  return errorMessages;
+};</code></pre>
+    <h3>Missing</h3>
     <p>The <strong>tokenizer</strong> option for the <strong>length</strong> validator is currently missing. Options like <strong>if</strong>, <strong>unless</strong> and <strong>on</strong>, which require more involved interactions with your Rails application, aren't really viable in a universal way on the client side and are simply ignored. Validating <strong>uniqueness</strong> with Judge might happen in the future, provided the method arrived at:</p>
     <ol>
       <li>Makes no assumptions about your app;</li>
@@ -192,67 +159,48 @@ end</pre>
       <h4>Static methods</h4>
       <h5 id="judge-validate">validate <code>judge.validate(elements, [callback])</code></h5>
       <p>Perform quick and easy validation on a single element or an array of elements (including array-like collections such as <code>NodeList</code>), without making public any watchers. An array of objects is returned, each object containing the validated element, a Boolean <code>valid</code> flag and an array of error messages, which is empty if <code>valid</code> is true.</p>
-      <pre class="sh_javascript">judge.validate(document.getElementsByTagName('input'));
+      <pre><code class="javascript">judge.validate(document.getElementsByTagName('input'));
   // => [ { valid:true, messages:[], element:HTMLInputElement },
-  //      { valid:false, messages:['must be even'], element:HTMLInputElement } ]</pre>
+  //      { valid:false, messages:['must be even'], element:HTMLInputElement } ]</code></pre>
       <p>The callback function, if provided, will be executed once for each element passed in the first argument. The callback receives three arguments: <code>(valid, messages, element)</code>.</p>
-      <pre class="sh_javascript">var elements = document.querySelectorAll('input[type=text]');
+      <pre><code class="javascript">var elements = document.querySelectorAll('input[type=text]');
 judge.validate(elements, function(valid, messages, element) {
   if (!valid) {
     element.style.border = '1px solid red';
   }
-});</pre>
+});</code></pre>
       <h4>Static properties</h4>
       <h5 id="customValidators">customValidators <code>judge.customValidators</code></h5>
-      <p>An empty object. Add your own validators here. Let's say you have something like this set up:</p>
-      <pre class="sh_ruby"># autoload this file 
-class FooValidator < ActiveModel::EachValidator
-  def validate_each(record, attribute, value)
-    record.errors[attribute] << "Should be foo" unless value == "foo"
-  end
-end</pre>
-
-      <pre class="sh_ruby"># your model
-class Thing < ActiveRecord::Base
-  validates :title, :foo => true
-end</pre>
-      <pre class="sh_ruby"># your view
-<%= form_for(@thing, :builder => Judge::FormBuilder) do |f| %>
-  <%= text_field :title, :validate => true %>
-<% end %></pre>
-      <p>Then Judge will expect a method named <code>foo</code> to have been added to <code>judge.customValidators</code>:</p>
-      <pre class="sh_javascript">// on the client side
-judge.customValidators.foo = function(value, options, messages) {
+      <p>An empty object. Add your own validators here. For example:</p>
+      <pre><code class="javascript">judge.customValidators.myValidator = function(value, options, messages) {
   var errorMessages = [];
-  if (value !== "foo") {
-    errorMessages.push("Should be foo");
-  }
+  // add validation logic here
   return errorMessages;
-};</pre>
-      <p>Judge validator methods receive the form element <code>value</code> and the validator <code>options</code> as defined in your model. The third parameter, <code>messages</code>, is currently only used by the ported <code>ActiveModel</code> validator methods and will be empty in custom validator methods.</p>
-      <p>Any validators added to <code>judge.customValidators</code> will be called automatically whenever a watcher <a href="#validators">validator</a> of the same name is detected.</p>
+};</code></pre>
+      <p>Judge validator methods receive the form element <code>value</code> and the validator <code>options</code> as defined in your model. The third parameter, <code>messages</code>, contains any error messages that may be used to validate the form element including those explicitly declared inside custom validator classes.</p>
+      <p>Any validator methods added to <code>judge.customValidators</code> will be called automatically whenever a watcher <a href="#validators">validator</a> of the same name is detected. Custom methods added here <em>will</em> override the standard validator types (presence, length etc.) if you use the same names &#8211; be cautious.</p>
       <p>Custom validator methods must return an array of error messages. If the value is valid, they must return an empty array.</p>
   </div>
     <h3>judge.Watcher</h3>
     <p>Constructor for watchers.  Watchers are wrapper objects that contain a DOM element and various validation methods. The constructor takes one argument, a DOM element</a>. For example:</p>
-    <pre class="sh_javascript">var watcher = new judge.Watcher(document.getElementById('foo'));</pre>
+    <pre><code class="javascript">var watcher = new judge.Watcher(document.getElementById('foo'));</code></pre>
     <div class="indent">
       <h4>Instance methods</h4>
       <h5>validate <code>watcher.validate([callback])</code></h5>
       <p>Validate the current value of the wrapped DOM element. An object is returned, containing the validated element, a Boolean <code>valid</code> flag and an array of error messages, which is empty if <code>valid</code> is true.</p>
-      <pre class="sh_javascript">watcher.validate();
-  // => { valid:false, messages:['must be even'], element:HTMLInputElement }</pre>
+      <pre><code class="javascript">watcher.validate();
+  // => { valid:false, messages:['must be even'], element:HTMLInputElement }</code></pre>
       <p>The callback function, if provided, receives three arguments: <code>(valid, messages, element)</code>.</p>
-      <pre class="sh_javascript">watcher.validate(function(valid, messages, element) {
+      <pre><code class="javascript">watcher.validate(function(valid, messages, element) {
   if (!valid) {
     element.style.border = '1px solid red';
   }
-});</pre>
+});</code></pre>
       <h4>Instance properties</h4>
       <h5 id="validators">validators <code>watcher.validators</code></h5>
       <p>Returns an array of validators (JavaScript object representations of the associated <code>ActiveModel</code> validators) for the wrapped element.</p>
-      <pre class="sh_javascript">watcher.validators;
-  // => [ { kind:'presence', options:{ &hellip; } }, { kind:'format', options:{ &hellip; } } ]</pre>
+      <pre><code class="javascript">watcher.validators;
+  // => [ { kind:'presence', options:{ &hellip; } }, { kind:'format', options:{ &hellip; } } ]</code></pre>
     </div>
     <h3>judge.store</h3>
     <p>Contains some methods for storing and retrieving watchers in groups, for more customised validation scenarios. Have you ever wanted to validate a number of form elements when the user triggers an event? Storing your reference to the elements can make things easier.</p>
@@ -260,53 +208,53 @@ judge.customValidators.foo = function(value, options, messages) {
       <h4>Static methods</h4>
       <h5>save <code>judge.store.save(key, element)</code></h5>
       <p>Store watcher(s) for element(s) against a key, for later use. If the key doesn't already exist, it will be created. Returns the store object.</p>
-      <pre class="sh_javascript">judge.store.save('mykey', document.getElementById('foo'));
+      <pre><code class="javascript">judge.store.save('mykey', document.getElementById('foo'));
   // => [ { element:HTMLInputElement, &hellip; } ]
 
 judge.store.save('mykey', document.getElementsByTagName('input'));
-  // => [ { element:HTMLInputElement, &hellip; }, { element:HTMLInputElement, &hellip; }, &hellip; ]</pre>
+  // => [ { element:HTMLInputElement, &hellip; }, { element:HTMLInputElement, &hellip; }, &hellip; ]</code></pre>
       <h5>get <code>judge.store.get(key)</code></h5>
       <p>Return an array of watchers saved against the key. If no key is given, the store object is returned.</p>
-      <pre class="sh_javascript">judge.store.get('mykey'); 
+      <pre><code class="javascript">judge.store.get('mykey'); 
   // => [ { element:HTMLInputElement, &hellip; } ]
 
 judge.store.get();
-  // => { mykey:[ { element:HTMLInputElement, &hellip; } ], &hellip; }</pre>
+  // => { mykey:[ { element:HTMLInputElement, &hellip; } ], &hellip; }</code></pre>
       <h5>getDOM <code>judge.store.getDOM(key)</code></h5>
       <p>Return an array of DOM elements from watchers stored against a key. If no key is given, the store object is returned, with all watchers converted to their wrapped DOM elements.</p>
-      <pre class="sh_javascript">judge.store.getDOM('mykey');
+      <pre><code class="javascript">judge.store.getDOM('mykey');
   // => [ HTMLInputElement, HTMLInputElement &hellip; ]
   
 judge.store.getDOM();
-  // => { mykey: [ HTMLInputElement ], mykey2: [ HTMLInputElement &hellip; ] }</pre>
+  // => { mykey: [ HTMLInputElement ], mykey2: [ HTMLInputElement &hellip; ] }</code></pre>
 
       <h5>validate <code>judge.store.validate(key, [callback])</code></h5>
       <p>A shortcut for <code>judge.validate(judge.store.getDOM(key))</code>. Validate all elements stored within watchers against the given key. Returns <code>null</code> if no key is passed or no watchers are found.</p>
-      <pre class="sh_javascript">judge.store.validate('mykey');
-// => [ { valid:true, messages:[], element:HTMLInputElement },
-//      { valid:false, messages:['must be even'], element:HTMLInputElement } ]
+      <pre><code class="javascript">judge.store.validate('mykey');
+  // => [ { valid:true, messages:[], element:HTMLInputElement },
+  //      { valid:false, messages:['must be even'], element:HTMLInputElement } ]
 
 judge.store.validate();
-  // => null</pre>
+  // => null</code></pre>
       <p>The callback function will be executed once for each watcher stored against the given key. Same behaviour as <code><a href="#judge-validate">judge.validate</a></code>.</p>
       <h5>remove <code>judge.store.remove(key, element)</code></h5>
       <p>Remove individual stored watcher. Returns remaining watchers stored at key, or <code>undefined</code> if none remain (store property is then deleted). If you want to remove all watchers stored against a key, or all stored watchers, use the <a href="#clear"><code>clear</code></a> method.</p>
-      <pre class="sh_javascript">judge.store.remove('mykey', document.getElementById('foo'));
-  // => { mykey:[ &hellip; ], mykey2:[ &hellip; ] }</pre>
+      <pre><code class="javascript">judge.store.remove('mykey', document.getElementById('foo'));
+  // => { mykey:[ &hellip; ], mykey2:[ &hellip; ] }</code></pre>
       <h5 id="clear">clear <code>judge.store.clear(key)</code></h5>
       <p>Remove all watchers stored against a key or, if no key is given, all stored watchers. Returns store object after watchers were removed.</p>
-      <pre class="sh_javascript">judge.store.save('inputs', document.getElementsByTagName('input'));
+      <pre><code class="javascript">judge.store.save('inputs', document.getElementsByTagName('input'));
 judge.store.save('textareas', document.getElementsByTagName('textarea'));
 judge.store.clear('inputs');
   // => { textareas: [ HTMLInputElement &hellip; ] }
 judge.store.clear();
-  // => {} </pre>
+  // => {} </code></pre>
     </div>
 
     <h2 id="tests">Tests</h2>
     <p>Judge uses Travis for continuous integration. Current status of master branch: <a href="http://travis-ci.org/joecorcoran/judge" class="clean"><img src="http://travis-ci.org/joecorcoran/judge.png" alt="Judge build status on Travis" /></a></p>
     <p>Since Travis is still quite young, you might want to run the test suite yourself:</p>
-    <pre><span class="comment"># All specs, JavaScript specs run headlessly (requires phantomjs and casperjs)</span>
+    <pre><code class="no-highlight"><span class="comment"># All specs, JavaScript specs run headlessly (requires phantomjs and casperjs)</span>
 <span class="prompt">$</span> bundle exec rake
 
 <span class="comment"># Only Ruby specs</span>
@@ -316,34 +264,35 @@ judge.store.clear();
 <span class="prompt">$</span> bundle exec rake jasmine:headless
 
 <span class="comment"># Only JavaScript specs, with Selenium</span>
-<span class="prompt">$</span> bundle exec rake jasmine:ci</pre>
+<span class="prompt">$</span> bundle exec rake jasmine:ci</code></pre>
 
     <h2 id="extensions">Extensions</h2>
     <p>If you use <a href="https://github.com/justinfrench/formtastic">Formtastic</a> or <a href="https://github.com/plataformatec/simple_form">SimpleForm</a>, there are extension gems to help you use Judge within your forms without any extra setup. They are essentially basic patches that add the <code>:validate => true</code> option to the FormBuilder <code>input</code> method.</p>
     <div class="indent">
       <h3>Formtastic</h3>
       <p><a href="https://github.com/joecorcoran/judge-formtastic">https://github.com/joecorcoran/judge-formtastic</a></p>
-      <pre>gem "judge-formtastic", "~> x.x.x", :require => "judge/formtastic"</pre>
-      <pre class="sh_ruby"><%= semantic_form_for(@user) do |f| %>
-    <%= f.input :name, :validate => true %>
-  <% end %></pre>
+      <pre><code class="no-highlight">gem "judge-formtastic", "~> x.x.x", :require => "judge/formtastic"</code></pre>
+      <pre><code class="ruby"><%= semantic_form_for(@user) do |f| %>
+  <%= f.input :name, :validate => true %>
+<% end %></code></pre>
       <h3>SimpleForm</h3>
       <p><a href="https://github.com/joecorcoran/judge-simple_form">https://github.com/joecorcoran/judge-simple_form</a></p>
-      <pre>gem "judge-simple_form", "~> x.x.x", :require => "judge/simple_form"</pre>
-      <pre class="sh_ruby"><%= simple_form_for(@user) do |f| %>
-    <%= f.input :name, :validate => true %>
-  <% end %></pre>
+      <pre><code class="no-highlight">gem "judge-simple_form", "~> x.x.x", :require => "judge/simple_form"</code></pre>
+      <pre><code class="ruby"><%= simple_form_for(@user) do |f| %>
+  <%= f.input :name, :validate => true %>
+<% end %></code></pre>
     </div>
     
     <div class="changelog">
       <h2 id="changelog">Changelog</h2>
-      <p class="one"><span class="version">1.4.0</span> <code>judge.store.validate</code> now accepts callback function too.</p>
+      <p class="one"><span class="version">1.5.0</span> Added interface for declaring localised messages within <code>EachValidator</code>s, which means we can reliably pass custom messages to the client side. Some internal implementation details have been altered and underscore.js was updated.</p>
+      <p class="two"><span class="version">1.4.0</span> <code>judge.store.validate</code> now accepts callback function too.</p>
       <p class="two"><span class="version">1.3.0</span> Validate methods now accept callbacks; <code>judge.utils</code> removed in favour of functions within a closure; some specs were tidied/deleted as appropriate.</p>
-      <p class="two"><span class="version">1.2.0</span> Changes to the format of validator functions; improved method of including custom validators; updated dependencies; fixed RegExp flag bug.</p>
+      <p class="three"><span class="version">1.2.0</span> Changes to the format of validator functions; improved method of including custom validators; updated dependencies; fixed RegExp flag bug.</p>
       <p class="three"><span class="version">1.1.0</span> Fixed incorrect Enumerable implementation in ValidatorCollection. Lots more internal tidying, including extraction of HTML attribute building.</p>
-      <p class="three"><span class="version">1.0.0</span> Validator code extracted into classes; Form builder methods no longer require &ldquo;validated_&rdquo; prefix; Added <code>judge.store.validate()</code> shortcut method; Some minor implementation updates to judge.js; No more dummy app in tests, no more crappy Gemfile, no more Jeweler.</p>
+      <p class="four"><span class="version">1.0.0</span> Validator code extracted into classes; Form builder methods no longer require &ldquo;validated_&rdquo; prefix; Added <code>judge.store.validate()</code> shortcut method; Some minor implementation updates to judge.js; No more dummy app in tests, no more crappy Gemfile, no more Jeweler.</p>
       <p class="four"><span class="version">0.5.0</span> Error messages looked up through Rails i18n.</p>
-      <p class="four"><span class="version">0.4.3</span> IE bug fixes: No longer checking for element type in the Watcher constructor, to avoid IE object string "quirk"; now using <code>typeof</code> to check for undefined properties of <code>window</code>.</p>
+      <p><span class="version">0.4.3</span> IE bug fixes: No longer checking for element type in the Watcher constructor, to avoid IE object string "quirk"; now using <code>typeof</code> to check for undefined properties of <code>window</code>.</p>
       <p><span class="version">0.4.2</span> Fixed bug introduced in the last bug fix &#8211; now <em>globally</em> replacing double slashes :)</p>
       <p><span class="version">0.4.1</span> Fixed slash escaping bug in judge.js RegExp converter; removed uniqueness data from data attributes to prevent judge.js from expecting a validation method.</p>
       <p><span class="version">0.4.0</span> Added new form builders.</p>
@@ -361,15 +310,26 @@ judge.store.clear();
     </div>
 
   </div>
+  <script src="scripts/highlight.js" type="text/javascript"></script>
+  <script src="scripts/javascript.js" type="text/javascript"></script>
+  <script src="scripts/ruby.js" type="text/javascript"></script>
   <script type="text/javascript">
-var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
-document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
-</script>
-<script type="text/javascript">
-try {
-var pageTracker = _gat._getTracker("UA-3245696-3");
-pageTracker._trackPageview();
-} catch(err) {}</script>
+    hljs.initHighlightingOnLoad();
+    var inlineCodes = document.querySelectorAll('p code');
+    for (var i = 0, l = inlineCodes.length; i < l; i += 1) {
+      hljs.highlightBlock(inlineCodes[i]);
+    }
+  </script>
+  <script type="text/javascript">
+    var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");
+    document.write(unescape("%3Cscript src='" + gaJsHost + "google-analytics.com/ga.js' type='text/javascript'%3E%3C/script%3E"));
+    </script>
+    <script type="text/javascript">
+    try {
+    var pageTracker = _gat._getTracker("UA-3245696-3");
+    pageTracker._trackPageview();
+    } catch(err) {}
+  </script>
 </body>
 </html>
 
