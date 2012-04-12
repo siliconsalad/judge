@@ -1,95 +1,86 @@
+require 'message_config'
+
 module Judge
 
   class MessageCollection
 
-    MESSAGE_MAP = {
-      :confirmation => { :base => :confirmation },
-      :acceptance   => { :base => :accepted },
-      :presence     => { :base => :blank },
-      :length       => { :base => nil,
-                         :options => {
-                           :minimum => :too_short,
-                           :maximum => :too_long,
-                           :is      => :wrong_length    
-                         }
-                       },
-      :format       => { :base => :invalid },
-      :inclusion    => { :base => :inclusion },
-      :exclusion    => { :base => :exclusion },
-      :numericality => { :base => :not_a_number,
-                         :options => {
-                           :greater_than             => :greater_than, 
-                           :greater_than_or_equal_to => :greater_than_or_equal_to, 
-                           :equal_to                 => :equal_to, 
-                           :less_than                => :less_than, 
-                           :less_than_or_equal_to    => :less_than_or_equal_to,
-                           :odd                      => :odd,
-                           :even                     => :even
-                         }
-                       }
-    }
+    include MessageConfig
 
-    ALLOW_BLANK = [:format, :exclusion, :inclusion, :length]
+    attr_reader   :object, :method, :amv, :kind, :options
 
-    DEFAULT_OPTS = { :generate => true }
-
-    attr_reader   :object, :method, :kind, :options, :mm
-    attr_accessor :messages
-
-    def initialize(object, method, amv, opts = {})
-      opts = DEFAULT_OPTS.merge(opts)
+    def initialize(object, method, amv)
       @object   = object
       @method   = method
+      @amv      = amv
       @kind     = amv.kind
       @options  = amv.options.dup
-      @mm       = MESSAGE_MAP
       @messages = {}
-      generate_messages! unless opts[:generate] == false
+      generate_messages!
     end
 
     def generate_messages!
-      if messages.blank?
-        %w{base options blank integer}.each do |type|
-          self.send(:"generate_#{type}!")
-        end
+      %w{base options integer custom blank}.each do |type|
+        @messages = @messages.merge(self.send(:"#{type}_messages"))
       end
     end
 
     def to_hash
-      messages
+      @messages
+    end
+
+    def custom_messages?
+      amv.respond_to?(:messages_to_lookup) && amv.messages_to_lookup.present?
     end
 
     private
 
-    def generate_base!
-      if mm.has_key?(kind) && mm[kind][:base].present?
-        base_message = mm[kind][:base]
-        messages[base_message] = object.errors.generate_message(method, base_message, options)
+    def base_messages
+      msgs = {}
+      if MESSAGE_MAP.has_key?(kind) && MESSAGE_MAP[kind][:base].present?
+        base_message = MESSAGE_MAP[kind][:base]
+        msgs[base_message] = object.errors.generate_message(method, base_message, options)
       end
+      msgs
     end
 
-    def generate_options!
-      if mm.has_key?(kind) && mm[kind][:options].present?
-        opt_messages = mm[kind][:options]
+    def options_messages
+      msgs = {}
+      if MESSAGE_MAP.has_key?(kind) && MESSAGE_MAP[kind][:options].present?
+        opt_messages = MESSAGE_MAP[kind][:options]
         opt_messages.each do |opt, opt_message|
           if options.has_key?(opt)
             options_for_interpolation = { :count => options[opt] }.merge(options)
-            messages[opt_message] = object.errors.generate_message(method, opt_message, options_for_interpolation)
+            msgs[opt_message] = object.errors.generate_message(method, opt_message, options_for_interpolation)
           end
         end
       end
+      msgs
     end
 
-    def generate_blank!
-      if ALLOW_BLANK.include?(kind) && options[:allow_blank].blank? && messages[:blank].blank?
-        messages[:blank] = object.errors.generate_message(method, :blank)
+    def blank_messages
+      msgs = {}
+      if ALLOW_BLANK.include?(kind) && options[:allow_blank].blank? && @messages[:blank].blank?
+        msgs[:blank] = object.errors.generate_message(method, :blank)
       end
+      msgs
     end
 
-    def generate_integer!
+    def integer_messages
+      msgs = {}
       if kind == :numericality && options[:only_integer].present?
-        messages[:not_an_integer] = object.errors.generate_message(method, :not_an_integer)
+        msgs[:not_an_integer] = object.errors.generate_message(method, :not_an_integer)
       end
+      msgs
+    end
+
+    def custom_messages
+      msgs = {}
+      if custom_messages?
+        amv.messages_to_lookup.each do |key|
+          msgs[key.to_sym] = object.errors.generate_message(method, key)
+        end
+      end
+      msgs
     end
 
   end

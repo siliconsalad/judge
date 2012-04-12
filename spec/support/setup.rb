@@ -1,4 +1,4 @@
-# setup ActiveRecord classes for tests
+# setup fake ActiveRecord class for tests
 ActiveRecord::Base.establish_connection(:adapter => "sqlite3", :database => ":memory:")
 ActiveRecord::Schema.define(:version => 1) do
   create_table :users do |t|
@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(:version => 1) do
     t.integer :team_id
     t.string :time_zone
     t.integer :discipline_id
-    t.string :city
+    t.string :foo
   end
   create_table :teams do |t|
     t.string :name
@@ -47,7 +47,7 @@ class User < ActiveRecord::Base
   validates :team_id,       :presence => true
   validates :time_zone,     :presence => true
   validates :discipline_id, :presence => true
-  validates :city,          :city => true
+  validates :foo,           :foo => true
 end
 
 class Team < ActiveRecord::Base; end
@@ -63,9 +63,6 @@ class Discipline < ActiveRecord::Base
   belongs_to :sport
   belongs_to :user
 end
-
-# i18n locale file
-I18n.load_path << File.expand_path("spec/support/locale/en.yml")
 
 # hack to stop #url_for error
 module ActionDispatch::Routing::PolymorphicRoutes
